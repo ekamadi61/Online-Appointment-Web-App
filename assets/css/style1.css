@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+  transition: all 0.3s ease;
+}
+
+
+a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+.logo {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+nav {
+  
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  background: #23232e;
+  height: 8vh;
+}
+header{
+  width:100%;
+
+}
+
+main {
+  background: url("../bgpics/BkgImg.jpg") no-repeat center center;
+  background-size: cover;
+  height: 92vh;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+}
+
+.nav-list li {
+  letter-spacing: 3px;
+  margin-left: 32px;
+}
+
+.mobile-menu {
+  display: none;
+  cursor: pointer;
+}
+
+.mobile-menu div {
+  width: 32px;
+  height: 2px;
+  background: #fff;
+  margin: 8px;
+  transition: 0.3s;
+}
+
+/*mobile media query*/
+@media (max-width: 480px) {
+  body {
+    overflow-x: hidden;
+  }
+  .nav-list {
+    position: absolute;
+    top: 8vh;
+    right: 0;
+    width: 50vw;
+    height: 92vh;
+    background: #23232e;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in;
+  }
+  .nav-list li {
+    margin-left: 0;
+    opacity: 0;
+  }
+  .mobile-menu {
+    display: block;
+  
+  }
+
+  .button{
+    width: 80%;
+  }
+
+
+
+/*body*/
+
+.home-content{
+  height: 100vh;
+  width: 100%;
+  background:url("../bgpics/BkgImg.jpg") no-repeat center center;
+  background-size: cover;
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 60px;
+}
+.home-content h2{
+  
+  font-size: 50px;
+}
+.home-content h3{
+  
+  font-size: 42px;
+  margin-top: -8px;
+}
+.home-content h3 span{
+  color: var(--nav-main);
+}
+
+.home-content p{
+  
+  font-size: 16px;
+  width: 45%;
+  margin: 4px 0 30px 0;
+}
+.home-content a{
+  color: #333;
+  font-size: 20px;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+ 
+}
+.home-content a i{
+  transform: rotate(45deg);
+  font-size: 16px;
+}
+.home-content a:hover{
+  background: var(--switchers-main);
+}
+@media (max-width: 1050px) {
+  .home-content p{
+    width: 70%;
+  }
+}
+.button {
+  background-color: rgb(124, 157, 170);
+  border: none;
+  /* color: white; */
+  padding: 20px;
+  text-align:center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 2px;
+  cursor: pointer;
+  width: 15%;
+}
+.button {
+  border-radius: 45px;
+}
+
+  
+.home-content h2{
+  
+  font-size: 21px;
+}
+.home-content h3{
+  
+  font-size: 21px;
+  margin-top: -8px;
+}
+.home-content h3 span{
+  color: var(--nav-main);
+}
+
+.home-content p{
+  
+  font-size: 16px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+
+/* For 1024 Resolution */  
+
+  
+  
+ 
+  
+  @media (max-width: 1050px) {
+   
+
+    .button {
+      background-color: rgb(124, 157, 170);
+     /* border: none;*/
+      border-radius: 45px;
+      padding: 20px;
+      text-align:center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 2px;
+      cursor: pointer;
+      width: 15%;
+    }
+    
+    
+      
+    .home-content h2{
+      
+      font-size: 70px;
+    }
+    .home-content h3{
+      
+      font-size: 40px;
+      margin-top: -8px;
+    }
+    
+    
+    .home-content p{
+      font-size: 16px;
+      width: 100%;
+      margin: 10px 0;
+    }
+   
+    .home-content a{
+      color: #333;
+      font-size: 70px;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+     
+    }
+    .home-content{
+      height: 100vh;
+      width: 100%;
+      background:url("../bgpics/BkgImg.jpg") no-repeat center center;
+      background-size: cover;
+     
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 60px;
+    }
+  
+    
+  .home-content a i{
+   
+    font-size: 16px;
+  }
+  
+   
+  
+  
+}  
+
+
+
+
+
+
+
+
+
+}
