@@ -2,8 +2,8 @@
 include('config.php');
 session_start();
 error_reporting(0);
-if(isset($_SESSION['username'])){
-    header("Location: dashboard.php");
+if(isset($_SESSION['username']) && isset($_SESSION['mail'])){
+    header("Location: home.php");
 }
 
 if(isset($_POST['submit']))
@@ -17,7 +17,8 @@ if(isset($_POST['submit']))
     if($result->num_rows > 0){
         $row = mysqli_fetch_assoc($result);
         $_SESSION['username'] = $row['username'];
-        header("Location: dashboard.php");
+        $_SESSION['mail'] = $row['mail'];
+        header("Location: home.php");
     }else{
         echo "<script>alert('Invalid Email or Password.')</script>";
     }
@@ -33,12 +34,14 @@ if(isset($_POST['submit']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doc Zone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/login.css">
+    <link rel="stylesheet" type="text/css" href="login.css">
+
+    
 </head>
 <body>
         <div class="inner">
             <div class="photo">
-                <img src="assets/bgpics/slider-3.png">
+                <img src="slider-3.png">
             </div>
             <div class="user-form">
                 <h1>Admin Login!</h1>
@@ -55,7 +58,14 @@ if(isset($_POST['submit']))
                         <button class="btn primary" type="submit" name="submit">Login</button>
 						<a href="signup.php" class="btn btn-primary">Sign Up</a>
                     </div>
+
+                    
+                    
+                    
+                    
                 </form>
+                
+                <a href="dashboard/pword.html">Forgot Password?</a>
             </div>
         </div>
 </body>

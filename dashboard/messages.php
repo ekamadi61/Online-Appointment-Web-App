@@ -1,3 +1,9 @@
+<?php 
+session_start();
+if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
+    header("Location: login.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,9 +19,7 @@
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -34,7 +38,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -52,9 +56,7 @@
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider"
-
-            <!-- Heading-->
+            <hr class="sidebar-divider" <!-- Heading-->
             <div class="sidebar-heading">
                 Interface
             </div>
@@ -67,34 +69,27 @@
                 </a>
 
             </li>
-			<hr class="sidebar-divider"
-
-            <!-- Nav Item - Utilities Collapse Menu -->
+            <hr class="sidebar-divider" <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link " href="appointments.php">
                     <i class="fas fa-fw fa-calendar-alt"></i>
                     <span>Bookings</span>
                 </a>
-      
-            </li>
-			<hr class="sidebar-divider"
-         
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            </li>
+            <hr class="sidebar-divider" <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="doctors.php">
                     <i class="fas fa-fw fa-hospital"></i>
                     <span>Doctors</span>
                 </a>
-           
-            </li>
-			<hr class="sidebar-divider"
 
-            <!-- Nav Item - Tables -->
+            </li>
+            <hr class="sidebar-divider" <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    
-					<i class="fas fa-fw fa-comments"></i>
+
+                    <i class="fas fa-fw fa-comments"></i>
                     <span>Messages</span></a>
             </li>
 
@@ -126,11 +121,9 @@
                     </form>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -144,18 +137,14 @@
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
                             <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -169,16 +158,13 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
-                       <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['username'] . "";?></span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -192,7 +178,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -209,7 +195,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Messages</h1>
-                   
+
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -226,7 +212,7 @@
                                             <th>Email</th>
                                             <th>Cell Phone</th>
                                             <th>Message</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -236,35 +222,35 @@
                                             <th>Email</th>
                                             <th>Cell Phone</th>
                                             <th>Message</th>
-                                          
+
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <?php
 
                                         include "config.php"; // Using database connection file here
-                                        
-                                        $records = mysqli_query($conn,"select * from contact_info"); // fetch data from database
-                                        
-                                        while($data = mysqli_fetch_array($records))
-                                        {
+
+                                        $records = mysqli_query($conn, "select * from contact_info"); // fetch data from database
+
+                                        while ($data = mysqli_fetch_array($records)) {
                                         ?>
-                                          <tr>
-                                            <td><?php echo $data['id']; ?></td>
-                                            <td><?php echo $data['user']; ?></td>
-                                           <td><?php echo $data['mail']; ?></td> 
-                                           <td><?php echo $data['cell']; ?></td>
-                                           <td><?php echo $data['msg']; ?></td>
-                                          </tr>	
+                                            <tr>
+                                                <td><?php echo $data['id']; ?></td>
+                                                <td><?php echo $data['user']; ?></td>
+                                                <td><?php echo $data['mail']; ?></td>
+                                                <td><?php echo $data['cell']; ?></td>
+                                                <td><?php echo $data['msg']; ?></td>
+                                            </tr>
                                         <?php
                                         }
                                         ?>
-                                        </table>
-                                        
-                                        <?php mysqli_close($conn); // Close connection ?>
-                                        
-                                   
-                                    </tbody>
+                                </table>
+
+                                <?php mysqli_close($conn); // Close connection 
+                                ?>
+
+
+                                </tbody>
                                 </table>
                             </div>
                         </div>
@@ -298,8 +284,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -311,7 +296,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="logout.php">Logout</a>
                 </div>
             </div>
         </div>

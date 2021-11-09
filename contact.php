@@ -24,15 +24,17 @@
         $query = "INSERT INTO contact_info(user, mail, cell, msg )"."VALUES('$user','$mail','$cell','$msg')";
 		
 		$run = mysqli_query($conn,$query) or die(mysqli_error($conn));
-		if($run){
-			echo "Form submitted succesfully";
-            
-		}else{
-			echo "Data not submitted";
-		}
+		
+         if ($run) {
+            $message = 'success';
+            header('refresh:3;contact.php');
+        } else {
+             $errormsg = 'error';
+             echo "all feilds required";
+        }
 
-        header("Location: contact.php"); // redirect back to your contact form
-        exit;
+        // header("Location: contact.php"); // redirect back to your contact form
+        //exit;
 
       
     }
@@ -59,6 +61,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
  
         <link rel="stylesheet" href="assets/css/style1.css">
+        <!--sweet alert docs-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   
       
     </head>
@@ -74,7 +79,7 @@
         <ul class="nav-list">
           <li><a href="index.html">Home&nbsp;</a></li>
           <li><a href="service.html">Services</a></li>
-          <li><a href="appointment.php">Book Appointment</a></li>
+         <!-- <li><a href="appointment.php">Book Appointment</a></li>-->
           <li><a href="contact.php">Contact Us</a></li>
 		<li><a href="login.php">Sign In</a></li>
         </ul>
@@ -149,6 +154,27 @@
                        type="submit" 
                        value="Send Message" />
                 <i class="fa fa-send fa-fw send-icon"></i>
+
+                <?php
+                    if(!empty($message)){
+                    echo'<script type="text/javascript">
+                        jQuery(function validation(){
+                        swal("Message Sent", "Thank you for Contacting Us!", "success");
+                        });
+                        </script>';
+                        }else{}
+                    if(empty($errormsg)){
+                    }else{
+                    echo'<script type="text/javascript">
+                        jQuery(function validation(){
+                        swal("Please Fill in correct details", "Fail", "error", {
+                        button: "Continue",
+                            });
+                        });
+                    </script>';
+                    }
+                
+                ?>
             </form>
         </div>
         

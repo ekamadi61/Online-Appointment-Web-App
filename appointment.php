@@ -1,5 +1,6 @@
 <?php
 include('config.php');
+
 if (isset($_POST['submit'])) {
   if (!empty($_POST['fname']) && !empty($_POST['email']) && !empty($_POST['phone']) && !empty($_POST['age']) && !empty($_POST['gender']) && !empty($_POST['appointment_date']) && !empty($_POST['appointment_time']) && !empty($_POST['remarks'])) {
     $fname               = $_POST['fname'];
@@ -14,18 +15,19 @@ if (isset($_POST['submit'])) {
     $query = "INSERT INTO bookings(fname, email, phone, age, gender, appointment_date, appointment_time, remarks)" . "VALUES('$fname','$email','$phone','$age', '$gender','$appointment_date','$appointment_time','$remarks')";
 
     $run = mysqli_query($conn, $query) or die(mysqli_error($conn));
-    if ($run) {
-      echo "Form submitted succesfully";
-      
-    } else {
-      echo "Data not submitted";
+
+    if($run){
+     
+      $message = 'success';
+      header('refresh:3;index.html');
+    
     }
   } else {
+    $errormsg = 'error';
     echo "all feilds required";
   }
  
-  header("Location: appointment.php"); // redirect back to your contact form
-  exit;
+  
 
   $conn->close();
 }
@@ -40,37 +42,21 @@ if (isset($_POST['submit'])) {
   <title>Doc Zone</title>
   <!--form links-->
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
+  <script src="jquery.min.js"></script>
+ 
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
+  
+
 </head>
 
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Doc Zone</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="service.html">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.php">Contact Us</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-
-
+  
   <!--form-->
   <style>
     html,
@@ -285,7 +271,7 @@ if (isset($_POST['submit'])) {
 
 
 
-  <form action="" method="post">
+  <form action="" method="post" id="form">
     <div class="banner">
       <h1>Online Appointment Booking</h1>
     </div>
@@ -340,12 +326,36 @@ if (isset($_POST['submit'])) {
 
 
     <div class="btn-block">
-      <button type="submit" name="submit">Submit</button>
+      <button type="submit" name="submit" id="btnSubmit">Submit</button>
+      
     </div>
 
-    
+    <?php
+    if(!empty($message)){
+      echo'<script type="text/javascript">
+          jQuery(function validation(){
+          swal("Thank you for booking with Us", "done", "success");
+          });
+          </script>';
+        }else{}
+    if(empty($errormsg)){
+    }else{
+      echo'<script type="text/javascript">
+          jQuery(function validation(){
+          swal("Please Fill in correct details", "Fail", "error", {
+          button: "Continue",
+            });
+          });
+      </script>';
+    }
+  ?>
+
+
 
   </form>
 </body>
+
+
+
 
 </html>

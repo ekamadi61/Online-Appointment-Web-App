@@ -8,10 +8,21 @@ if(isset($_POST['submit']))
 				$mail 					= $_POST['mail'];
 				$password			    = $_POST['password'];
 				
+                // if(!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
+                //     exit('Invalid email address'); // Use your own error handling ;)
+                // }
+                // $select = mysqli_query($conn, "SELECT `mail` FROM `users` WHERE `mail` = '".$_POST['mail']."'") or exit(mysqli_error($conn));
+                // if(mysqli_num_rows($select)) {
+                //     exit('This email is already being used');
+                //     // echo '<script language="javascript">';
+                //     // echo 'alert("message successfully sent")';
+                //     // echo '</script>';
+                // }        
 
-		$query = "INSERT INTO users(username, mail, password)"."VALUES('$username','$mail','$password')";
+                
 		
-		$run = mysqli_query($conn,$query) or die(mysqli_error($conn));
+        $query = "INSERT INTO users(username, mail, password)"."VALUES('$username','$mail','$password')";
+        $run = mysqli_query($conn,$query) or die(mysqli_error($conn));
 		if($run){
 			echo "Form submitted succesfully";
 		}else{
@@ -35,16 +46,21 @@ if(isset($_POST['submit']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doc Zone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/signup.css">
+    <link rel="stylesheet" type="text/css" href="signup.css">
+
+    
+
 </head>
 <body>
         <div class="inner">
             <div class="photo">
-                <img src="assets/bgpics/slider-3.png">
+                <img src="slider-3.png">
             </div>
             <div class="user-form">
+                 
                 <h1>Create Account!</h1>
                 <form action="signup.php" method="post">
+               
                                
                     <i class="fas fa-user icon"></i> 
                     <input type="text"  name="username" id="username" placeholder="Your name">
@@ -63,4 +79,5 @@ if(isset($_POST['submit']))
             </div>
         </div>
 </body>
+
 </html>
