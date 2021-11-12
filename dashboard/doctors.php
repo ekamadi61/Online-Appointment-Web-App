@@ -1,7 +1,36 @@
 <?php 
+include('config.php');
 session_start();
 if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
     header("Location: login.php");
+    }
+    
+    if(isset($_POST['save'])){
+        $id = $_POST['update_id'];
+        $username = $_POST['username'];
+        $specialty = $_POST['specialty'];
+        $contact = $_POST['contact'];
+        $address = $_POST['address'];
+        $hours = $_POST['hours'];
+       
+
+        $query = "UPDATE doctors SET username='$username', specialty ='$specialty', contact ='$contact', address='$address', hours = '$hours' WHERE id='$id'";
+        $run = mysqli_query($conn, $query);
+        if($run){
+            $_SESSION['status'] = "Record updated Successfuly";
+            header("location: doctors.php");
+        }
+    }
+    //delete script
+    
+    if(isset($_POST['delete'])){
+        $id = $_POST['delete_id'];
+        $query = "DELETE FROM doctors WHERE id ='$id'";
+        $run = mysqli_query($conn, $query);
+        if($run){
+            $_SESSION['status1'] = "Record deleted Successfuly";
+            header("location: doctors.php");
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -15,7 +44,9 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <title>Doc Zone Dash</title>
+    
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,6 +57,13 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+    h1{
+        font-size:20px;
+        text-align: center;
+    }
+    
+    </style>
 
 </head>
 
@@ -219,6 +257,29 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <?php
+                            if(isset($_SESSION['status'])){?>
+                                <div class="alert alert-success" role="alert">
+                                    <?php echo $_SESSION['status']; ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                <?php
+                                unset($_SESSION['ststus']);
+                            }
+                            ?>
+                            
+                            <?php
+                            if(isset($_SESSION['status1'])){?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo $_SESSION['status1']; ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                <?php
+                                unset($_SESSION['ststus']);
+                            }
+                            ?>
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -264,16 +325,104 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                                                 <td><?php echo $data['address']; ?></td>
                                                 <td><?php echo $data['hours']; ?></td>
                                                 <td>
-                                                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                                
+                                                <button type="button" class="btn btn-success editbtn"  name="edit"><i class="fas fa-edit" data-toggle="modal" data-target="#exampleModal"></i></button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Record</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <form action="doctors.php" method="post">
+                                                        <input type="hidden" class="form-control" name="update_id" id="update_id">
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" id="update_username" name="username" placeholder="Enter Doctor full name">
+                                                            </div>
+                                                            <div class="form-group">
+
+                                                                <select class="form-control" name="specialty" id="update_specialty">
+                                                                    <option selected>Specialty</option>
+                                                                    <option value="Physician">Physician</option>
+                                                                    <option value="Surgeon">Surgeon</option>
+                                                                    <option value="Cardiologist">Cardiologist</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+
+                                                                <input type="text" class="form-control" id="update_address" name="address" placeholder="Address">
+                                                            </div>
+                                                            <div class="form-group">
+
+                                                                <input type="tel" class="form-control" id="update_contact" name="contact" placeholder="contact">
+                                                            </div>
+
+                                                            <div class="form-group">
+
+                                                                <select class="form-control" name="hours" id="update_hours">
+                                                                    <option selected>Working Hours</option>
+                                                                    <option value="8:00 - 11:00 AM">8:00 - 11:00 AM</option>
+                                                                    <option value="9:00 - 12:00 PM">9:00 - 12:00 PM</option>
+                                                                    <option value="2:00 - 4:00 PM">2:00 - 4:00 PM</option>
+                                                                </select>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary" name="save">Save </button>
+                                                    </div>
+
+                                                    </form>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <!--delete button-->
+                                                <button type="button" class="btn btn-danger deletebtn" name="delete" data-toggle="modal" data-target="#exampleModal2"><i class="far fa-trash-alt"></i></button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="doctors.php" method="post">
+                                                        <input type="hidden" class="form-control" name="delete_id" id="delete_id">
+                                                                <h1>Do you want to delete this record?</h1>
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-primary" name="delete">Ok</button>
+                                                            </div>
+                                                        </form>
+                                                        
+
+                                                    </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                </div>
                                                 </td>
 
                                             </tr>
+                                           
                                         <?php
                                         }
                                         ?>
                                 </table>
+                               
 
                                 <?php mysqli_close($conn); // Close connection 
                                 ?>
@@ -349,6 +498,49 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','.editbtn',function(){
+                $('#editmodal').modal('show');
+                $tr=$(this).closest('tr');
+                var data = $tr.children("td").map(function(){
+                    return $(this).text();
+                }).get();
+                console.log(data);
+                $('#update_id').val(data[0]);
+                $('#update_username').val(data[1]);
+                $('#update_specialty').val(data[2]);
+                $('#update_contact').val(data[3]);
+                $('#update_address').val(data[4]);
+                $('#update_hours').val(data[5]);
+               
+            });
+        });
+
+    </script>
+
+<script>
+        $(document).ready(function(){
+            $(document).on('click','.deletebtn',function(){
+                $('#deletemodal').modal('show');
+                $tr=$(this).closest('tr');
+                var data = $tr.children("td").map(function(){
+                    return $(this).text();
+                }).get();
+                console.log(data);
+                $('#delete_id').val(data[0]);
+                
+               
+                
+             
+            });
+        });
+
+
+    </script>
+   
+   
+    
 </body>
 
 </html>

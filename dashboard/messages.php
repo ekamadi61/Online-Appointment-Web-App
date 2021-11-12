@@ -1,8 +1,43 @@
 <?php 
+include('config.php');
 session_start();
 if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
     header("Location: login.php");
     }
+
+          
+        if(isset($_POST['save'])){
+
+            $id = $_POST['update_id'];
+            $user = $_POST['user'];
+            $mail = $_POST['mail'];
+            $cell = $_POST['cell'];
+            $msg = $_POST['msg'];
+           
+           
+    
+            $query = "UPDATE contact_info SET user ='$user', mail ='$mail', cell ='$cell', msg='$msg' WHERE id ='$id'";
+            $run = mysqli_query($conn, $query);
+            if($run){
+                $_SESSION['status'] = "Record updated Successfuly";
+                header('location: messages.php');
+            }else{
+                echo "something went wrong!";
+            }
+        }
+
+        if(isset($_POST['delete'])){
+            $id = $_POST['delete_id'];
+            $query = "DELETE FROM contact_info WHERE id ='$id'";
+            $run = mysqli_query($conn, $query);
+            if($run){
+                $_SESSION['status1'] = "Record deleted Successfuly";
+                header('location: messages.php');
+            }else{
+                echo "something went wrong!";
+            }
+        }
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +61,13 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+    h1{
+        font-size:20px;
+        text-align: center;
+    }
+    
+    </style>
 
 </head>
 
@@ -200,11 +242,35 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                           
                             <h6 class="m-0 font-weight-bold text-primary">Contact Information</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <?php
+                            if(isset($_SESSION['status'])){?>
+                                <div class="alert alert-success" role="alert">
+                                    <?php echo $_SESSION['status']; ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                <?php
+                                unset($_SESSION['ststus']);
+                            }
+                            ?>
+                            
+                            <?php
+                            if(isset($_SESSION['status1'])){?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo $_SESSION['status1']; ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                <?php
+                                unset($_SESSION['ststus']);
+                            }
+                            ?>
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -212,6 +278,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                                             <th>Email</th>
                                             <th>Cell Phone</th>
                                             <th>Message</th>
+                                            <th>Actions</th>
 
                                         </tr>
                                     </thead>
@@ -222,6 +289,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                                             <th>Email</th>
                                             <th>Cell Phone</th>
                                             <th>Message</th>
+                                            <th>Actions</th>
 
                                         </tr>
                                     </tfoot>
@@ -240,6 +308,83 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                                                 <td><?php echo $data['mail']; ?></td>
                                                 <td><?php echo $data['cell']; ?></td>
                                                 <td><?php echo $data['msg']; ?></td>
+                                                <td>
+                                                
+                                                <button type="button" class="btn btn-success editbtn"data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Record</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <form action="messages.php" method="post">
+                                                        <input type="hidden" class="form-control" id="update_id" name="update_id">
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" id="update_username" name="user" placeholder="Enter Username">
+                                                            </div>
+                                                            <div class="form-group">
+                                                            <input type="text" class="form-control" id="update_email" name="mail" placeholder="Enter email">
+                                                                
+                                                            </div>
+                                                            <div class="form-group">
+
+                                                                <input type="tel" class="form-control" id="update_cell" name="cell" placeholder="Cell Phone Number">
+                                                            </div>
+                                                            <div class="form-group">
+
+                                                                <input type="text" class="form-control" id="update_msg" name="msg" placeholder="Message">
+                                                            </div>
+
+                                                            
+
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary" name="save">Save </button>
+                                                    </div>
+
+                                                    </form>
+                                                    </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <!--delete button-->
+                                                <button type="button" class="btn btn-danger deletebtn" name="delete" data-toggle="modal" data-target="#exampleModal2"><i class="far fa-trash-alt"></i></button>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="messages.php" method="post">
+                                                            <input type="hidden" id="delete_id" name="delete_id">
+                                                                <h1>Do you want to delete this record ?</h1>
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-primary" name="delete">Ok</button>
+                                                            </div>
+                                                        </form>
+                                                        
+
+                                                    </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                </td>
                                             </tr>
                                         <?php
                                         }
@@ -318,6 +463,48 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(document).on('click','.editbtn',function(){
+                $('#editmodal').modal('show');
+                $tr=$(this).closest('tr');
+                var data = $tr.children("td").map(function(){
+                    return $(this).text();
+                }).get();
+                console.log(data);
+                $('#update_id').val(data[0]);
+                $('#update_username').val(data[1]);
+                $('#update_email').val(data[2]);
+                $('#update_cell').val(data[3]);
+                $('#update_msg').val(data[4]);
+               
+            });
+        });
+
+    </script>
+
+<script>
+        $(document).ready(function(){
+            $(document).on('click','.deletebtn',function(){
+                $('#deletemodal').modal('show');
+                $tr=$(this).closest('tr');
+                var data = $tr.children("td").map(function(){
+                    return $(this).text();
+                }).get();
+                console.log(data);
+                $('#delete_id').val(data[0]);
+                
+               
+                
+             
+            });
+        });
+
+
+    </script>
+   
+   
 
 </body>
 

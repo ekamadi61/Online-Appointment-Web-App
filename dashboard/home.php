@@ -60,6 +60,8 @@ if (isset($_POST['submit'])) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    
+
     <style>
         .icon-cards .card {
             display: inline-block;
@@ -249,7 +251,7 @@ if (isset($_POST['submit'])) {
                     <div class="row">
                         <div class="icon-cards">
                             <div class="card" style="width: 10rem;">
-                                <img class="card-img-top" src="calendar.png" alt="Card image cap">
+                                <img class="card-img-top" src="img/calendar.png" alt="Card image cap">
                                 <div class="card-body">
 
 
@@ -258,7 +260,7 @@ if (isset($_POST['submit'])) {
                             </div>
 
                             <div class="card" style="width: 10rem;">
-                                <img class="card-img-top" src="email.png" alt="Card image cap">
+                                <img class="card-img-top" src="img/email.png" alt="Card image cap">
                                 <div class="card-body">
                                     <a href="messages.php" class="btn btn-primary">View Messages</a>
                                 </div>
@@ -268,7 +270,7 @@ if (isset($_POST['submit'])) {
                             </div>
 
                             <div class="card" style="width: 10rem;">
-                                <img class="card-img-top" src="add-user.png" alt="Card image cap">
+                                <img class="card-img-top" src="img/add-user.png" alt="Card image cap">
                                 <div class="card-body">
 
 
@@ -367,7 +369,7 @@ if (isset($_POST['submit'])) {
 
 
                             <div class="card" style="width: 10rem;">
-                                <img class="card-img-top" src="profile.png" alt="Card image cap">
+                                <img class="card-img-top" src="img/profile.png" alt="Card image cap">
                                 <div class="card-body">
                                     <a href="profile.php" class="btn btn-primary">View Profile</a>
                                 </div>
@@ -376,8 +378,7 @@ if (isset($_POST['submit'])) {
 
                     </div>
                 </div>
-
-
+               
 
                 <!-- Content Row -->
 

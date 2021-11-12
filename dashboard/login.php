@@ -34,14 +34,14 @@ if(isset($_POST['submit']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doc Zone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
 
     
 </head>
 <body>
         <div class="inner">
             <div class="photo">
-                <img src="slider-3.png">
+                <img src="img/loginn.jpg">
             </div>
             <div class="user-form">
                 <h1>Admin Login!</h1>
@@ -58,14 +58,22 @@ if(isset($_POST['submit']))
                         <button class="btn primary" type="submit" name="submit">Login</button>
 						<a href="signup.php" class="btn btn-primary">Sign Up</a>
                     </div>
-
                     
                     
+                    <div class="footer">
+                    <div class="a">
+                    <a href="dashboard/pword.html">Forgot Password?</a>
+                    </div>
+                
+                    <div class="b">
                     
-                    
+                    <a href="../index.html"><img src="homepage1.png" width="28" /></a>
+                    </div>
+                </div>
                 </form>
                 
-                <a href="dashboard/pword.html">Forgot Password?</a>
+                
+
             </div>
         </div>
 </body>

@@ -70,7 +70,7 @@
     <body>
 		<header>
       <nav>
-        <a class="logo" href="/">DOC ZONE</a>
+        <a class="logo" href="index.html">DOC ZONE</a>
         <div class="mobile-menu">
           <div class="line1"></div>
           <div class="line2"></div>

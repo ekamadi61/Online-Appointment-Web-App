@@ -27,8 +27,6 @@ if (isset($_POST['submit'])) {
     echo "all feilds required";
   }
  
-  
-
   $conn->close();
 }
 ?>
@@ -42,13 +40,11 @@ if (isset($_POST['submit'])) {
   <title>Doc Zone</title>
   <!--form links-->
 
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
-
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-  <script src="jquery.min.js"></script>
- 
+  <!--js-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   
   
@@ -57,7 +53,7 @@ if (isset($_POST['submit'])) {
 
 <body>
   
-  <!--form-->
+  <!--form css-->
   <style>
     html,
     body {
@@ -132,11 +128,6 @@ if (isset($_POST['submit'])) {
       width: 100%;
       height: 100%;
     }
-
-    
-    
-
-
     input,
     select,
     textarea {
@@ -268,9 +259,7 @@ if (isset($_POST['submit'])) {
     }
   </style>
   </head>
-
-
-
+<!--form-->
   <form action="" method="post" id="form">
     <div class="banner">
       <h1>Online Appointment Booking</h1>
@@ -349,13 +338,6 @@ if (isset($_POST['submit'])) {
       </script>';
     }
   ?>
-
-
-
   </form>
 </body>
-
-
-
-
 </html>

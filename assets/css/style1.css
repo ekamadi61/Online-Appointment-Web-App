@@ -42,8 +42,61 @@ main {
   background: url("../bgpics/BkgImg.jpg") no-repeat center center;
   background-size: cover;
   height: 92vh;
+
+}
+/*start of home content section large sreens*/
+section{
+  /* border:1px solid red; */
+  padding-top: 230px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+.home-content h2{
+  
+  font-size: 40px;
+  font-family: "Poppins", sans-serif;
+}
+.home-content h3{
+  
+  font-size: 30px;
+  margin-top: -8px;
+  font-family: "Poppins", sans-serif;
+}
+.button {
+  background-color: rgb(124, 157, 170);
+ border: none;
+  border-radius: 45px;
+  padding: 20px;
+  text-align:center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 2px;
+  cursor: pointer;
+  width: 15%;
 }
 
+.big-title {
+  font-size: 1.4rem;
+  color: var(--darkOne);
+  text-transform: capitalize;
+  line-height: 1.4;
+  
+}
+
+.text {
+  color: solid black;
+  font-size: 1.1rem;
+  margin: 0.5rem 0 0.3rem;
+  max-width: 600px;
+  line-height: 2.3;
+  font-family: "Poppins", sans-serif;
+}
+
+
+
+/**/
 .nav-list {
   list-style: none;
   display: flex;
@@ -94,68 +147,31 @@ main {
   
   }
 
-  .button{
-    width: 80%;
-  }
-
-
-
-/*body*/
-
-.home-content{
-  height: 100vh;
-  width: 100%;
-  background:url("../bgpics/BkgImg.jpg") no-repeat center center;
-  background-size: cover;
-  height: 92vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 60px;
+ /*smart phoone resolution 375*667 viewport/750*1520 pixels */
+  @media (max-width: 400px) {
+   
+  section{
+  /* border:1px solid red; */
+  padding-top: 150px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
 }
 .home-content h2{
   
-  font-size: 50px;
+  font-size: 25px;
+  font-family: "Poppins", sans-serif;
 }
 .home-content h3{
   
-  font-size: 42px;
+  font-size: 15px;
   margin-top: -8px;
-}
-.home-content h3 span{
-  color: var(--nav-main);
-}
-
-.home-content p{
-  
-  font-size: 16px;
-  width: 45%;
-  margin: 4px 0 30px 0;
-}
-.home-content a{
-  color: #333;
-  font-size: 20px;
-  padding: 12px 24px;
-  border-radius: 6px;
-  text-decoration: none;
- 
-}
-.home-content a i{
-  transform: rotate(45deg);
-  font-size: 16px;
-}
-.home-content a:hover{
-  background: var(--switchers-main);
-}
-@media (max-width: 1050px) {
-  .home-content p{
-    width: 70%;
-  }
+  font-family: "Poppins", sans-serif;
 }
 .button {
   background-color: rgb(124, 157, 170);
-  border: none;
-  /* color: white; */
+ border: none;
+  border-radius: 45px;
   padding: 20px;
   text-align:center;
   text-decoration: none;
@@ -163,102 +179,25 @@ main {
   font-size: 16px;
   margin: 10px 2px;
   cursor: pointer;
-  width: 15%;
+  /* width: 15%; */
+  width:80%;
 }
-.button {
-  border-radius: 45px;
-}
-
+.big-title {
+  font-size: 1.4rem;
+  color: var(--darkOne);
+  text-transform: capitalize;
+  line-height: 1.4;
   
-.home-content h2{
-  
-  font-size: 21px;
-}
-.home-content h3{
-  
-  font-size: 21px;
-  margin-top: -8px;
-}
-.home-content h3 span{
-  color: var(--nav-main);
 }
 
-.home-content p{
-  
-  font-size: 16px;
-  width: 100%;
-  margin: 10px 0;
+.text {
+  color: solid black;
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0.3rem;
+  max-width: 600px;
+  line-height: 2.3;
+  font-family: "Poppins", sans-serif;
 }
-
-
-/* For 1024 Resolution */  
-
-  
-  
- 
-  
-  @media (max-width: 1050px) {
-   
-
-    .button {
-      background-color: rgb(124, 157, 170);
-     /* border: none;*/
-      border-radius: 45px;
-      padding: 20px;
-      text-align:center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 10px 2px;
-      cursor: pointer;
-      width: 15%;
-    }
-    
-    
-      
-    .home-content h2{
-      
-      font-size: 70px;
-    }
-    .home-content h3{
-      
-      font-size: 40px;
-      margin-top: -8px;
-    }
-    
-    
-    .home-content p{
-      font-size: 16px;
-      width: 100%;
-      margin: 10px 0;
-    }
-   
-    .home-content a{
-      color: #333;
-      font-size: 70px;
-      padding: 12px 24px;
-      border-radius: 6px;
-      text-decoration: none;
-     
-    }
-    .home-content{
-      height: 100vh;
-      width: 100%;
-      background:url("../bgpics/BkgImg.jpg") no-repeat center center;
-      background-size: cover;
-     
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 60px;
-    }
-  
-    
-  .home-content a i{
-   
-    font-size: 16px;
-  }
-  
    
   
   
