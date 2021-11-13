@@ -16,8 +16,13 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
         $appointment_time = $_POST['appointment_time'];
         $remarks = $_POST['remarks'];
 
-        $query = "UPDATE bookings SET fname ='".$fname."', email ='".$email."', phone ='".$phone."', age ='".$age."', gender = '".$gender."', appointment_date ='".$appointment_date."', appointment_time ='".$appointment_time."' remarks ='".$remarks."' WHERE id ='".$id."' ";
+        $query = "UPDATE bookings SET fname ='$fname', email ='$email', phone ='$phone', age ='$age', gender = '$gender', appointment_date ='$appointment_date', appointment_time ='$appointment_time' ,remarks ='$remarks' WHERE id ='$id' ";
         $run = mysqli_query($conn, $query);
+        if($run){
+            echo"Record updated";
+        }else{
+            echo"$conn->error";
+        }
     }
     //delete script
     
@@ -26,7 +31,9 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
         $query = "DELETE FROM bookings WHERE id ='".$id."'";
         $run = mysqli_query($conn, $query);
     }
+    
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -209,7 +216,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="profile.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -236,6 +243,12 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="report.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div>
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Bookings</h1>

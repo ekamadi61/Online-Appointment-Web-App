@@ -23,7 +23,7 @@ if(isset($_POST['submit']))
         echo "<script>alert('Invalid Email or Password.')</script>";
     }
 }
-
+$conn->close();
 
 ?>
   
@@ -62,12 +62,12 @@ if(isset($_POST['submit']))
                     
                     <div class="footer">
                     <div class="a">
-                    <a href="dashboard/pword.html">Forgot Password?</a>
+                    <a href="pword.html">Forgot Password?</a>
                     </div>
                 
                     <div class="b">
                     
-                    <a href="../index.html"><img src="homepage1.png" width="28" /></a>
+                    <a href="../index.html"><img src="img/homepage1.png" width="28" /></a>
                     </div>
                 </div>
                 </form>

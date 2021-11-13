@@ -1,45 +1,42 @@
 <?php
 include('config.php');
-if(isset($_POST['submit']))
+session_start();
+if(!empty($_POST['username']) && !empty($_POST['mail']) && !empty($_POST['password']))
 {
-	if(!empty($_POST['username']) && !empty($_POST['mail']) && !empty($_POST['password']))
-	{					 	
-				$username 				= $_POST['username'];
-				$mail 					= $_POST['mail'];
-				$password			    = $_POST['password'];
-				
-                // if(!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
-                //     exit('Invalid email address'); // Use your own error handling ;)
-                // }
-                // $select = mysqli_query($conn, "SELECT `mail` FROM `users` WHERE `mail` = '".$_POST['mail']."'") or exit(mysqli_error($conn));
-                // if(mysqli_num_rows($select)) {
-                //     exit('This email is already being used');
-                //     // echo '<script language="javascript">';
-                //     // echo 'alert("message successfully sent")';
-                //     // echo '</script>';
-                // }        
-
-                
+    if(isset($_POST['submit'])){
+        $username 				= $_POST['username'];
+		$mail 					= $_POST['mail'];
+		$password			    = $_POST['password'];
 		
-        $query = "INSERT INTO users(username, mail, password)"."VALUES('$username','$mail','$password')";
-        $run = mysqli_query($conn,$query) or die(mysqli_error($conn));
-		if($run){
-			echo "Form submitted succesfully";
-		}else{
-			echo "Data not submitted";
-		}
-	}
-		else{
-				echo "all feilds required";
-		}
+        $sql = "SELECT * FROM users WHERE mail='$mail'";
+        $run = mysqli_query($conn, $sql);
+        	
+        if($run){
+            echo "<script>alert('This email or Contact Number already associated with another account');</script>";
+            
+        }else{
+            $query = "INSERT INTO users(username, mail, password)"."VALUES('$username','$mail','$password')";
+            $run = mysqli_query($conn,$query) or die(mysqli_error($conn));
+            if($run){
+                echo "Account created succesfully!";
+                header("Location: login.php");
+                
+             }else{
+                 echo "Oops!Something went wrong!";
+             }
+		}      
+    }
 
-		header("Location: login.php"); // redirect back to your contact form
-        exit;
+}else{
+    echo "All fields required";
+   
+    }
 
-		$conn->close();
-	}
+unset($_SESSION);//addition
+$conn->close();
 
 ?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -53,11 +50,12 @@ if(isset($_POST['submit']))
 </head>
 <body>
         <div class="inner">
+            
             <div class="photo">
                 <img src="img/signup.jpg">
             </div>
             <div class="user-form">
-                 
+
                 <h1>Create Account!</h1>
                 <form action="signup.php" method="post">
                

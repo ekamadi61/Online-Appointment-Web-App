@@ -11,10 +11,11 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
         $specialty = $_POST['specialty'];
         $contact = $_POST['contact'];
         $address = $_POST['address'];
+        $rate    = $_POST['rate'];
         $hours = $_POST['hours'];
        
 
-        $query = "UPDATE doctors SET username='$username', specialty ='$specialty', contact ='$contact', address='$address', hours = '$hours' WHERE id='$id'";
+        $query = "UPDATE doctors SET username='$username', specialty ='$specialty', contact ='$contact', address='$address', rate = '$rate', hours = '$hours' WHERE id='$id'";
         $run = mysqli_query($conn, $query);
         if($run){
             $_SESSION['status'] = "Record updated Successfuly";
@@ -217,7 +218,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="profile.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -277,7 +278,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 <?php
-                                unset($_SESSION['ststus']);
+                                unset($_SESSION['status']);
                             }
                             ?>
                                     <thead>
@@ -287,6 +288,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                                             <th>Specialty</th>
                                             <th>Address</th>
                                             <th>Phone</th>
+                                            <th>Hourly Rate</th>
                                             <th>Working Hours</th>
                                             <th>Actions</th>
 
@@ -321,8 +323,9 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                                                 <td><?php echo $data['id']; ?></td>
                                                 <td><?php echo $data['username']; ?></td>
                                                 <td><?php echo $data['specialty']; ?></td>
-                                                <td><?php echo $data['contact']; ?></td>
                                                 <td><?php echo $data['address']; ?></td>
+                                                <td><?php echo $data['contact']; ?></td>
+                                                <td><?php echo $data['rate'];?></td>
                                                 <td><?php echo $data['hours']; ?></td>
                                                 <td>
                                                 
@@ -354,12 +357,13 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
-
                                                                 <input type="text" class="form-control" id="update_address" name="address" placeholder="Address">
                                                             </div>
                                                             <div class="form-group">
-
                                                                 <input type="tel" class="form-control" id="update_contact" name="contact" placeholder="contact">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" id="update_rate" name="rate" placeholder="Hourly rate">
                                                             </div>
 
                                                             <div class="form-group">
@@ -512,7 +516,8 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                 $('#update_specialty').val(data[2]);
                 $('#update_contact').val(data[3]);
                 $('#update_address').val(data[4]);
-                $('#update_hours').val(data[5]);
+                $('#update_rate').val(data[5]);
+                $('#update_hours').val(data[6]);
                
             });
         });

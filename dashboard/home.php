@@ -6,15 +6,16 @@ if (!isset($_SESSION['username'])) {
 }
 include('config.php');
 if (isset($_POST['submit'])) {
-    if (!empty($_POST['username']) && !empty($_POST['specialty']) && !empty($_POST['contact']) && !empty($_POST['address']) && !empty($_POST['hours'])) {
+    if (!empty($_POST['username']) && !empty($_POST['specialty']) && !empty($_POST['contact']) && !empty($_POST['address']) && !empty($_POST['rate']) && !empty($_POST['hours'])) {
         $username                 = $_POST['username'];
         $specialty                = $_POST['specialty'];
         $contact                  = $_POST['contact'];
         $address                  = $_POST['address'];
+        $rate                     = $_POST['rate'];
         $hours                    = $_POST['hours'];
 
 
-        $query = "INSERT INTO doctors(username, specialty, contact, address, hours)" . "VALUES('$username','$specialty','$contact','$address','$hours')";
+        $query = "INSERT INTO doctors(username, specialty, contact, address, rate, hours)" . "VALUES('$username','$specialty','$contact','$address','$rate','$hours')";
 
         $run = mysqli_query($conn, $query) or die(mysqli_error($conn));
         if ($run) {
@@ -59,6 +60,9 @@ if (isset($_POST['submit'])) {
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!--maps-->
+    
+
 
     
 
@@ -307,18 +311,16 @@ if (isset($_POST['submit'])) {
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
-
                                                                 <input type="text" class="form-control" id="address" name="address" placeholder="Address">
                                                             </div>
                                                             <div class="form-group">
-
                                                                 <input type="tel" class="form-control" id="contact" name="contact" placeholder="contact">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" id="rate" name="rate" placeholder="Consultation Fee rate/Hour">
                                                             </div>
 
                                                             <div class="form-group">
-
-
-
                                                                 <select class="form-control" name="hours">
                                                                     <option selected>Working Hours</option>
                                                                     <option value="8:00 - 11:00 AM">8:00 - 11:00</option>
@@ -436,5 +438,6 @@ if (isset($_POST['submit'])) {
 
 
 </body>
+
 
 </html>
