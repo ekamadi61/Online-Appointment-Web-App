@@ -270,17 +270,7 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                             }
                             ?>
                             
-                            <?php
-                            if(isset($_SESSION['status1'])){?>
-                                <div class="alert alert-danger" role="alert">
-                                    <?php echo $_SESSION['status1']; ?>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                <?php
-                                unset($_SESSION['status']);
-                            }
-                            ?>
+                          
                                     <thead>
                                         <tr>
                                             <th>ID</th>

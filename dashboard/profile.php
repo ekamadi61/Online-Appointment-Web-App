@@ -61,6 +61,18 @@ if (isset($_POST['save'])) {
         }
     
 }
+if(isset($_POST['delete'])){
+    $id = $_POST['delete_id'];
+    $query = "DELETE FROM userprofile WHERE id ='$id'";
+    $run = mysqli_query($conn, $query);
+    if($run){
+        $message = 'success';
+        header('refresh:3; profile.php');
+    }else{
+        $errormsg ='error';
+        echo "something went wrong!";
+    }
+}
 }
 ?>
 <!DOCTYPE html>
@@ -430,7 +442,55 @@ if (isset($_POST['save'])) {
                                 </div>
                                 <div class="col-md-4">
                                     <div class="p-3 py-5">
-                                        <div class="d-flex justify-content-between align-items-center profile"><span class="border px-3 p-1 add-experience"><i class="fa fa-trash"></i>&nbsp;Delete Profile</span></div><br>
+                                        <div class="d-flex justify-content-between align-items-center profile"><span class="border px-3 p-1 add-experience" data-toggle="modal" data-target="#exampleModal3"><i class="fa fa-trash"></i>&nbsp;Delete Profile</span></div><br>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <form action="profile.php" method="post">
+                                                            <input type="hidden" id="delete_id" name="delete_id">
+                                                                <h4>Do you want to delete this record ?</h4>
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-primary" name="delete">Ok</button>
+                                                            </div>
+
+                                                            <?php
+                                                            if(!empty($message)){
+                                                            echo'<script type="text/javascript">
+                                                                jQuery(function validation(){
+                                                                swal("Password Updated Succesfully!", "done", "success");
+                                                                });
+                                                                </script>';
+                                                                }else{}
+                                                            if(empty($errormsg)){
+                                                            }else{
+                                                            echo'<script type="text/javascript">
+                                                                jQuery(function validation(){
+                                                                swal("Please Fill in correct details", "Fail", "error", {
+                                                                button: "Continue",
+                                                                    });
+                                                                });
+                                                            </script>';
+                                                            }
+                                                        ?>
+
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Update password-->
                                         <div class="d-flex justify-content-between align-items-center profile"><span class="border px-3 p-1 add-experience" data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-lock-open"></i>&nbsp;Change Password</span></div><br>
 
 
@@ -465,7 +525,7 @@ if (isset($_POST['save'])) {
 
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary" name="save">Save changes</button>
+                                                                <button type="submit" class="btn btn-primary" name="delete">Save changes</button>
                                                             </div>
 
                                                             <?php
