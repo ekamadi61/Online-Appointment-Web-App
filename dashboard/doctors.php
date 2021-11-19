@@ -1,9 +1,7 @@
 <?php 
 include('config.php');
 session_start();
-if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
-    header("Location: login.php");
-    }
+
     
     if(isset($_POST['save'])){
         $id = $_POST['update_id'];
@@ -15,11 +13,12 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
         $hours = $_POST['hours'];
        
 
-        $query = "UPDATE doctors SET username='$username', specialty ='$specialty', contact ='$contact', address='$address', rate = '$rate', hours = '$hours' WHERE id='$id'";
+        $query = "UPDATE doctors SET username='$username', specialty ='$specialty', contact ='$contact', address='$address', rate = '$rate', hours = '$hours' WHERE id ='$id'";
         $run = mysqli_query($conn, $query);
         if($run){
             $_SESSION['status'] = "Record updated Successfuly";
             header("location: doctors.php");
+            exit();
         }
     }
     //delete script
@@ -29,9 +28,30 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
         $query = "DELETE FROM doctors WHERE id ='$id'";
         $run = mysqli_query($conn, $query);
         if($run){
-            $_SESSION['status1'] = "Record deleted Successfuly";
+            $_SESSION['status'] = "Record deleted Successfuly";
             header("location: doctors.php");
+            exit();
         }
+    }
+    //add doctor user
+    if(isset($_POST['done'])){
+        $docname 				= $_POST['docname'];
+		
+		$password			    = $_POST['password'];
+		
+       
+            $query = "INSERT INTO doctorusers(docname, password)"."VALUES('$docname','$password')";
+            $run = mysqli_query($conn,$query) or die(mysqli_error($conn));
+            if($run){
+                $message = 'success';
+            header('refresh:3;doctors.php');
+            exit();
+                
+             }else{
+                $errormsg = 'error';
+                echo "all feilds required";
+             
+		}      
     }
 ?>
 <!DOCTYPE html>
@@ -247,8 +267,67 @@ if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Doctors</h1>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Doctors</h1>
+                        <a href="report.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModal2"><i class="fas fa-user fa-sm text-white-50"></i> Add Doctor User</a>
+                    </div>
+                      <!-- Add doctor user Modal -->
+                      <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="doctors.php" method="post">
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control" id="username" name="docname" placeholder="username">
+                                                                </div>
+                                                                <div class="form-group">
 
+                                                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+
+                                                                </div>
+                                                              
+
+                                                            </div>
+
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary" name="done">Save changes</button>
+                                                            </div>
+
+                                                            <?php
+                                                            if(!empty($message)){
+                                                            echo'<script type="text/javascript">
+                                                                jQuery(function validation(){
+                                                                swal("User addded Succesfully!", "done", "success");
+                                                                });
+                                                                </script>';
+                                                                }else{}
+                                                            if(empty($errormsg)){
+                                                            }else{
+                                                            echo'<script type="text/javascript">
+                                                                jQuery(function validation(){
+                                                                swal("Please Fill in correct details", "Fail", "error", {
+                                                                button: "Continue",
+                                                                    });
+                                                                });
+                                                            </script>';
+                                                            }
+                                                        ?>
+
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                 
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">

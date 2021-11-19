@@ -2,9 +2,6 @@
 
 session_start();
 
-if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
-    header("Location: login.php");
-    }
 
 include('config.php');
 if (isset($_POST['submit'])) {

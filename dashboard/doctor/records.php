@@ -1,46 +1,36 @@
-<?php 
-include('config.php');
+<?php
+include 'config.php';
 session_start();
-// if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
-//     header("Location: login.php");
-//     exit();
-//     }
 
-          
-        if(isset($_POST['save'])){
+if(isset($_POST['update'])){
+      $id = $_POST['update_id'];
+      $username = $_POST['username'];
+      $contact = $_POST['contact'];
+      $address = $_POST['address'];
+      $bloodgroup = $_POST['bloodgroup'];
+      $age = $_POST['age'];
+      $gender = $_POST['gender'];
+      $temperature = $_POST['temperature'];
+      $weight = $_POST['weight'];
+      $symptoms = $_POST['symptoms'];
+      $diagnosis = $_POST['diagnosis'];
+      $prescription = $_POST['prescription'];
 
-            $id = $_POST['update_id'];
-            $user = $_POST['user'];
-            $mail = $_POST['mail'];
-            $cell = $_POST['cell'];
-            $msg = $_POST['msg'];
-           
-           
-    
-            $query = "UPDATE contact_info SET user ='$user', mail ='$mail', cell ='$cell', msg='$msg' WHERE id ='$id'";
-            $run = mysqli_query($conn, $query);
-            if($run){
-                $_SESSION['status'] = "Record updated Successfuly";
-                header('location: messages.php');
-                exit();
-            }else{
-                echo "something went wrong!";
-            }
-        }
+      $query = "UPDATE patients SET username ='$username', contact ='$contact', address ='$address', bloodgroup ='$bloodgroup', age='$age', gender = '$gender', temperature ='$temperature', symptoms ='$symptoms' ,diagnosis ='$diagnosis', prescription = '$prescription' WHERE id ='$id' ";
+      $run = mysqli_query($conn, $query);
+      if($run){
+          echo"Record updated";
+      }else{
+          echo"$conn->error";
+      }
+  }
 
-        if(isset($_POST['delete'])){
-            $id = $_POST['delete_id'];
-            $query = "DELETE FROM contact_info WHERE id ='$id'";
-            $run = mysqli_query($conn, $query);
-            if($run){
-                $_SESSION['status1'] = "Record deleted Successfuly";
-                header('location: messages.php');
-                exit();
-            }else{
-                echo "something went wrong!";
-            }
-        }
-        
+if(isset($_POST['delete'])){
+      $id = $_POST['delete_id'];
+      $query = "DELETE FROM patients WHERE id ='".$id."'";
+      $run = mysqli_query($conn, $query);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,14 +46,14 @@ session_start();
     <title>Doc Zone Dash</title>
 
     <!-- Custom fonts for this template -->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
     h1{
         font-size:20px;
@@ -83,11 +73,11 @@ session_start();
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="doctorhome.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Doc Zone Admin </div>
+                <div class="sidebar-brand-text mx-3">Doc Zone</div>
             </a>
 
             <!-- Divider -->
@@ -95,47 +85,42 @@ session_start();
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="home.php">
+                <a class="nav-link" href="doctorhome.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider" <!-- Heading-->
-            <div class="sidebar-heading">
-                Interface
-            </div>
+            <hr class="sidebar-divider">
+
+            
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="profile.php">
+                <a class="nav-link" href="docprofile.php">
                     <i class="fas fa-fw fa-user-circle"></i>
                     <span>Profile</span>
                 </a>
 
             </li>
-            <hr class="sidebar-divider" <!-- Nav Item - Utilities Collapse Menu -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link " href="appointments.php">
+                <a class="nav-link" href="doctorappointment.php">
                     <i class="fas fa-fw fa-calendar-alt"></i>
                     <span>Bookings</span>
                 </a>
 
             </li>
-            <hr class="sidebar-divider" <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="doctors.php">
-                    <i class="fas fa-fw fa-hospital"></i>
-                    <span>Doctors</span>
-                </a>
 
-            </li>
-            <hr class="sidebar-divider" <!-- Nav Item - Tables -->
+            <hr class="sidebar-divider">
+            <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="records.php">
 
-                    <i class="fas fa-fw fa-comments"></i>
-                    <span>Messages</span></a>
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Records</span></a>
             </li>
 
             <!-- Divider -->
@@ -200,17 +185,19 @@ session_start();
                             </div>
                         </li>
 
+
+
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['username'] . "";?></span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['docname'] . "";?></span>
+                                <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="profile.php">
+                                <a class="dropdown-item" href="docprofile.php">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -218,12 +205,9 @@ session_start();
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
+                                
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="logout.php" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="doclogout.php" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -238,121 +222,160 @@ session_start();
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <a href="report1.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    </div>
+
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Messages</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Records</h1>
 
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                           
-                            <h6 class="m-0 font-weight-bold text-primary">Contact Information</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Patient Records</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <?php
-                            if(isset($_SESSION['status'])){?>
-                                <div class="alert alert-success" role="alert">
-                                    <?php echo $_SESSION['status']; ?>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                <?php
-                                unset($_SESSION['status']);
-                            }
-                            ?>
-                            
-                         
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>Cell Phone</th>
-                                            <th>Message</th>
+                                            <th>Name</th>
+                                            <th>Contact</th>
+                                            <th>Address</th>
+                                            <th>Date Visited</th>
+                                            <th>Blood Group</th>
+                                            <th>Age</th>
+                                            <th>Gender</th>
+                                            <th>Temperature</th>
+                                            <th>Weight</th>
+                                            <th>Symptoms</th>
+                                            <th>Diagnosis</th>
+                                            <th>Prescription</th>
                                             <th>Actions</th>
 
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>Cell Phone</th>
-                                            <th>Message</th>
-                                            <th>Actions</th>
-
-                                        </tr>
-                                    </tfoot>
+                                    
                                     <tbody>
+
+
                                         <?php
 
                                         include "config.php"; // Using database connection file here
 
-                                        $records = mysqli_query($conn, "select * from contact_info"); // fetch data from database
+                                        $records = mysqli_query($conn, "select * from patients"); // fetch data from database
 
                                         while ($data = mysqli_fetch_array($records)) {
                                         ?>
                                             <tr>
                                                 <td><?php echo $data['id']; ?></td>
-                                                <td><?php echo $data['user']; ?></td>
-                                                <td><?php echo $data['mail']; ?></td>
-                                                <td><?php echo $data['cell']; ?></td>
-                                                <td><?php echo $data['msg']; ?></td>
-                                                <td>
+                                                <td><?php echo $data['username']; ?></td>
+                                                <td><?php echo $data['contact']; ?></td>
+                                                <td><?php echo $data['address']; ?></td>
+                                                <td><?php echo $data['date']; ?></td>
+                                                <td><?php echo $data['bloodgroup']; ?></td>
+                                                <td><?php echo $data['age']; ?></td>
+                                                <td><?php echo $data['gender']; ?></td>
+                                                <td><?php echo $data['temperature']; ?></td>
+                                                <td><?php echo $data['weight']; ?></td>
+                                                <td><?php echo $data['symptoms']; ?></td>
+                                                <td><?php echo $data['diagnosis']; ?></td>
+                                                <td><?php echo $data['prescription']; ?></td>
                                                 
-                                                <button type="button" class="btn btn-success editbtn"data-toggle="modal" data-target="#exampleModal"><i class="fas fa-edit"></i></button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Edit Record</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                
+                                                
+                                                <td>
+                                                <button type="button" class="btn btn-success editbtn" data-toggle="modal" data-target="#exampleModalLabel"><i class="fas fa-edit"></i></button>
+
+                                                 <!-- Modal -->
+                                    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Record</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                    <form action="messages.php" method="post">
-                                                        <input type="hidden" class="form-control" id="update_id" name="update_id">
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="records.php" method="post">
+                                                    <input type="hidden" class="form-control" name="update_id" id="update_id" >
                                                         <div class="modal-body">
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control" id="update_username" name="user" placeholder="Enter Username">
+                                                                <input type="text" class="form-control" id="update_name" name="username" placeholder="Enter Full Name">
                                                             </div>
                                                             <div class="form-group">
-                                                            <input type="text" class="form-control" id="update_email" name="mail" placeholder="Enter email">
-                                                                
-                                                            </div>
-                                                            <div class="form-group">
-
-                                                                <input type="tel" class="form-control" id="update_cell" name="cell" placeholder="Cell Phone Number">
+                                                            <input type="text" class="form-control" id="update_contact" name="contact" placeholder="Enter Contact Number">
+                                                               
                                                             </div>
                                                             <div class="form-group">
 
-                                                                <input type="text" class="form-control" id="update_msg" name="msg" placeholder="Message">
+                                                                <input type="tel" class="form-control" id="update_address" name="address" placeholder="Enter Address">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <select class="form-control" name="bloodgroup" id="update_blood">
+                                                                    <option selected>Blood group</option>
+                                                                    <option value="A">A</option>
+                                                                    <option value="B">B</option>
+                                                                    <option value="AB">AB</option>
+                                                                    <option value="O">O</option>
+                                                                    
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" id="update_age" name="age" placeholder="Enter Age">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                            <select class="form-control" name="gender" id="update_gender">
+                                                                    <option selected>Gender</option>
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                   
+                                                            </select>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" id="update_temp" name="temperature" placeholder="Enter Temperature">
                                                             </div>
 
                                                             
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" id="update_weight" name="weight" placeholder="Enter Weight">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                            <input type="text" class="form-control" id="update_symptoms" name="symptoms" placeholder="Symptoms">
+                                                            </div>
+                                                            <div class="form-group">
+                                                            <input type="text" class="form-control" id="update_diag" name="diagnosis" placeholder="Diagnosis">
+                                                            </div>
+                                                            <div class="form-group">
+                                                            <input type="text" class="form-control" id="update_pres" name="prescription" placeholder="Prescription">
+                                                            </div>
 
                                                         </div>
 
                                                         <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary" name="save">Save </button>
-                                                    </div>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary" name="update">Save changes</button>
+                                                        </div>
 
                                                     </form>
-                                                    </div>
-                                                    
-                                                    </div>
                                                 </div>
-                                                </div>
-                                                <!--delete button-->
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                               
                                                 <button type="button" class="btn btn-danger deletebtn" name="delete" data-toggle="modal" data-target="#exampleModal2"><i class="far fa-trash-alt"></i></button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                     <div class="modal-header">
@@ -362,9 +385,9 @@ session_start();
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="messages.php" method="post">
-                                                            <input type="hidden" id="delete_id" name="delete_id">
-                                                                <h1>Do you want to delete this record ?</h1>
+                                                        <form action="records.php" method="post">
+                                                            <input type="hidden" class="form-control" id="delete_id" name="delete_id">
+                                                                <h1>Do you want to delete this record?</h1>
                                                             <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                             <button type="submit" class="btn btn-primary" name="delete">Ok</button>
@@ -386,6 +409,7 @@ session_start();
 
                                 <?php mysqli_close($conn); // Close connection 
                                 ?>
+
 
 
                                 </tbody>
@@ -434,28 +458,28 @@ session_start();
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="logout.php">Logout</a>
+                    <a class="btn btn-primary" href="doclogout.php">Logout</a>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="../js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="../js/demo/datatables-demo.js"></script>
 
     <script>
         $(document).ready(function(){
@@ -467,11 +491,19 @@ session_start();
                 }).get();
                 console.log(data);
                 $('#update_id').val(data[0]);
-                $('#update_username').val(data[1]);
-                $('#update_email').val(data[2]);
-                $('#update_cell').val(data[3]);
-                $('#update_msg').val(data[4]);
-               
+                $('#update_name').val(data[1]);
+                $('#update_contact').val(data[2]);
+                $('#update_address').val(data[3]);
+                $('#update_bloodgroup').val(data[5]);
+                $('#update_age').val(data[6]);
+                $('#update_gender').val(data[7]);
+                $('#update_temperature').val(data[8]);
+                $('#update_weight').val(data[9]);
+                $('#update_symptoms').val(data[10]);
+                $('#update_diagnosis').val(data[11]);
+                $('#update_prescription').val(data[12]);
+                
+             
             });
         });
 
@@ -496,8 +528,6 @@ session_start();
 
 
     </script>
-   
-   
 
 </body>
 

@@ -1,9 +1,10 @@
 <?php 
 include('config.php');
 session_start();
-if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
-    header("Location: login.php");
-    }
+// if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])){
+//     header("Location: login.php");
+//     exit();
+//     }
 
     if(isset($_POST['update'])){
         $id = $_POST['update_id'];
