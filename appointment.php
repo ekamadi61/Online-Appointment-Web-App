@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
     $email              = $_POST['email'];
     $phone              = $_POST['phone'];
     $age                = $_POST['age'];
-    $gender                =$_POST['gender'];
+    $gender                = $_POST['gender'];
     $appointment_date   = $_POST['appointment_date'];
     $appointment_time   = $_POST['appointment_time'];
     $remarks            = $_POST['remarks'];
@@ -16,17 +16,16 @@ if (isset($_POST['submit'])) {
 
     $run = mysqli_query($conn, $query) or die(mysqli_error($conn));
 
-    if($run){
-     
+    if ($run) {
+
       $message = 'success';
       header('refresh:3;index.html');
-    
     }
   } else {
     $errormsg = 'error';
     echo "all feilds required";
   }
- 
+
   $conn->close();
 }
 ?>
@@ -46,13 +45,10 @@ if (isset($_POST['submit'])) {
   <!--js-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  
-  
-
 </head>
 
 <body>
-  
+
   <!--form css-->
   <style>
     html,
@@ -128,6 +124,7 @@ if (isset($_POST['submit'])) {
       width: 100%;
       height: 100%;
     }
+
     input,
     select,
     textarea {
@@ -174,10 +171,11 @@ if (isset($_POST['submit'])) {
 
     .gender input {
       width: auto;
-      } 
-      .gender label {
+    }
+
+    .gender label {
       padding: 0 5px 0 0;
-      } 
+    }
 
     .item span {
       color: red;
@@ -259,7 +257,7 @@ if (isset($_POST['submit'])) {
     }
   </style>
   </head>
-<!--form-->
+  <!--form-->
   <form action="" method="post" id="form">
     <div class="banner">
       <h1>Online Appointment Booking</h1>
@@ -286,15 +284,14 @@ if (isset($_POST['submit'])) {
         <input type="text" name="age" id="age" required />
       </div>
 
-      
-              <label for="Gender">Gender<span>*</span></label>
-              <div class="gender">
-                <input type="radio" value="male" id="male" name="gender" required/>
-                <label for="male" class="radio">Male</label>
-                <input type="radio" value="female" id="female" name="gender" required/>
-                <label for="female" class="radio">Female</label>
-              </div>
-            
+
+      <label for="Gender">Gender<span>*</span></label>
+      <div class="gender">
+        <input type="radio" value="male" id="male" name="gender" required />
+        <label for="male" class="radio">Male</label>
+        <input type="radio" value="female" id="female" name="gender" required />
+        <label for="female" class="radio">Female</label>
+      </div>
 
       <div class="item">
         <label for="date">Date<span>*</span></label>
@@ -312,24 +309,22 @@ if (isset($_POST['submit'])) {
         <textarea id="symptoms" name="remarks" rows="3"></textarea>
       </div>
     </fieldset>
-
-
     <div class="btn-block">
       <button type="submit" name="submit" id="btnSubmit">Submit</button>
-      
     </div>
 
     <?php
-    if(!empty($message)){
-      echo'<script type="text/javascript">
+    if (!empty($message)) {
+      echo '<script type="text/javascript">
           jQuery(function validation(){
           swal("Thank you for booking with Us", "done", "success");
           });
           </script>';
-        }else{}
-    if(empty($errormsg)){
-    }else{
-      echo'<script type="text/javascript">
+    } else {
+    }
+    if (empty($errormsg)) {
+    } else {
+      echo '<script type="text/javascript">
           jQuery(function validation(){
           swal("Please Fill in correct details", "Fail", "error", {
           button: "Continue",
@@ -337,7 +332,8 @@ if (isset($_POST['submit'])) {
           });
       </script>';
     }
-  ?>
+    ?>
   </form>
 </body>
+
 </html>

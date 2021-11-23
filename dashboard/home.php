@@ -2,8 +2,8 @@
 session_start();
 
 if (!isset($_SESSION['username']) && !isset($_SESSION['mail'])) {
-  header("Location: login.php");
-  exit();
+    header("Location: login.php");
+    exit();
 }
 include 'config.php';
 if (isset($_POST['submit'])) {
@@ -30,10 +30,6 @@ if (isset($_POST['submit'])) {
     } else {
         echo "all feilds required";
     }
-
-    // header("Location: home.php"); // redirect back to your contact form
-    // exit;
-
     $conn->close();
 }
 
@@ -59,14 +55,10 @@ if (isset($_POST['submit'])) {
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <!--sweet alert docs-->
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!--maps-->
-    
-
-
-    
 
     <style>
         .icon-cards .card {
@@ -96,38 +88,31 @@ if (isset($_POST['submit'])) {
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="img/success1.png">
                 </div>
                 <div class="sidebar-brand-text mx-3">Doc Zone Admin </div>
             </a>
-
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="home.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
             <!-- Heading -->
             <div class="sidebar-heading">
                 Interface
             </div>
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="profile.php">
                     <i class="fas fa-fw fa-user-circle"></i>
                     <span>Profile</span>
                 </a>
-
             </li>
-
             <hr class="sidebar-divider">
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
@@ -135,23 +120,16 @@ if (isset($_POST['submit'])) {
                     <i class="fas fa-fw fa-calendar-alt"></i>
                     <span>Bookings</span>
                 </a>
-
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="doctors.php">
                     <i class="fas fa-fw fa-hospital-user"></i>
                     <span>Doctors</span>
                 </a>
-
             </li>
-
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -159,32 +137,25 @@ if (isset($_POST['submit'])) {
                     <i class="fas fa-fw fa-comments"></i>
                     <span>Messages</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
@@ -196,23 +167,18 @@ if (isset($_POST['submit'])) {
                             </div>
                         </div>
                     </form>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-
-
                             <div class="topbar-divider d-none d-sm-block"></div>
-
                             <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['username'] . "";?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['username'] . ""; ?></span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -236,57 +202,39 @@ if (isset($_POST['submit'])) {
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+
                     </div>
-
                     <!-- Content Row -->
-
-
                     <div class="row">
                         <div class="icon-cards">
                             <div class="card" style="width: 10rem;">
                                 <img class="card-img-top" src="img/calendar.png" alt="Card image cap">
                                 <div class="card-body">
-
-
                                     <a href="appointments.php" class="btn btn-primary">View Bookings</a>
                                 </div>
                             </div>
-
                             <div class="card" style="width: 10rem;">
-                                <img class="card-img-top" src="img/email.png" alt="Card image cap">
+                                <img class="card-img-top" src="img/mail.png" alt="Card image cap">
                                 <div class="card-body">
                                     <a href="messages.php" class="btn btn-primary">View Messages</a>
                                 </div>
-
-                                
-                               
-                            </div>
-
+                           </div>
                             <div class="card" style="width: 10rem;">
-                                <img class="card-img-top" src="img/add-user.png" alt="Card image cap">
+                                <img class="card-img-top" src="img/medical-team.png" alt="Card image cap">
                                 <div class="card-body">
-
-
-                                    <!--<a href="doctor.html" class="btn btn-primary">Add Doctor</a>-->
-
-                                    <!-- Button trigger modal -->
+                                <!-- Button trigger modal -->
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                                         Add Doctor
                                     </button>
-
                                     <!-- Modal -->
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -304,7 +252,6 @@ if (isset($_POST['submit'])) {
                                                                 <input type="text" class="form-control" id="username" name="username" placeholder="Enter Doctor full name">
                                                             </div>
                                                             <div class="form-group">
-
                                                                 <select class="form-control" name="specialty">
                                                                     <option selected>Specialty</option>
                                                                     <option value="Physician">Physician</option>
@@ -321,7 +268,6 @@ if (isset($_POST['submit'])) {
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control" id="rate" name="rate" placeholder="Consultation Fee rate/Hour">
                                                             </div>
-
                                                             <div class="form-group">
                                                                 <select class="form-control" name="hours">
                                                                     <option selected>Working Hours</option>
@@ -329,9 +275,7 @@ if (isset($_POST['submit'])) {
                                                                     <option value="9:00 - 12:00 PM">9:00 - 12:00</option>
                                                                     <option value="2:00 - 4:00 PM">2:00 - 4:00</option>
                                                                 </select>
-
                                                             </div>
-
                                                         </div>
 
                                                         <div class="modal-footer">
@@ -339,38 +283,35 @@ if (isset($_POST['submit'])) {
                                                             <button type="submit" class="btn btn-primary" name="submit">Save changes</button>
                                                         </div>
 
-
                                                         <?php
-                                                            if(!empty($message)){
-                                                            echo'<script type="text/javascript">
+                                                        if (!empty($message)) {
+                                                            echo '<script type="text/javascript">
                                                                 jQuery(function validation(){
                                                                 swal("New Doctor Added!", "done", "success");
                                                                 });
                                                                 </script>';
-                                                                }else{}
-                                                            if(empty($errormsg)){
-                                                            }else{
-                                                            echo'<script type="text/javascript">
+                                                        } else {
+                                                        }
+                                                        if (empty($errormsg)) {
+                                                        } else {
+                                                            echo '<script type="text/javascript">
                                                                 jQuery(function validation(){
                                                                 swal("Please Fill in correct details", "Fail", "error", {
                                                                 button: "Continue",
                                                                     });
                                                                 });
                                                             </script>';
-                                                            }
+                                                        }
                                                         ?>
 
                                                     </form>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
 
                             </div>
-
 
                             <div class="card" style="width: 10rem;">
                                 <img class="card-img-top" src="img/profile.png" alt="Card image cap">
@@ -382,7 +323,6 @@ if (isset($_POST['submit'])) {
 
                     </div>
                 </div>
-               
 
                 <!-- Content Row -->
 
@@ -437,9 +377,5 @@ if (isset($_POST['submit'])) {
 
             <!-- Custom scripts for all pages-->
             <script src="js/sb-admin-2.min.js"></script>
-
-
 </body>
-
-
 </html>

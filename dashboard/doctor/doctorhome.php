@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['docname'])) {
-  header("Location: doctorlogin.php");
+    header("Location: doctorlogin.php");
 }
 include('config.php');
 if (isset($_POST['submit'])) {
@@ -59,14 +59,11 @@ if (isset($_POST['submit'])) {
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <!--sweet alert docs-->
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!--maps-->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
-
-    
 
     <style>
         .icon-cards .card {
@@ -78,46 +75,47 @@ if (isset($_POST['submit'])) {
             padding-right: .5rem;
             padding-bottom: .1rem;
         }
-       
-.order-card {
-    color: #fff;
-}
 
-.bg-c-blue {
-    background: linear-gradient(45deg,#4099ff,#73b4ff);
-}
+        .order-card {
+            color: #fff;
+        }
 
-.bg-c-green {
-    background: linear-gradient(45deg,#2ed8b6,#59e0c5);
-}
+        .bg-c-blue {
+            background: linear-gradient(45deg, #4099ff, #73b4ff);
+        }
 
-.card {
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
-    box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
-    border: none;
-    margin-bottom: 30px;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-}
+        .bg-c-green {
+            background: linear-gradient(45deg, #87eaed, #87eaed);
+        }
 
-.card .card-block {
-    padding: 25px;
-    
-}
+        .card {
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+            box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+            border: none;
+            margin-bottom: 30px;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
 
-.order-card i {
-    font-size: 26px;
-}
+        .card .card-block {
+            padding: 25px;
 
-.f-left {
-    float: left;
-}
+        }
 
-.f-right {
-    float: right;
- }
-</style>
+        .order-card i {
+            font-size: 26px;
+        }
+
+        .f-left {
+            float: left;
+
+        }
+
+        .f-right {
+            float: right;
+        }
+    </style>
 
 </head>
 
@@ -132,7 +130,7 @@ if (isset($_POST['submit'])) {
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="doctorhome.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="../img/success.png">
                 </div>
                 <div class="sidebar-brand-text mx-3">Doc Zone</div>
             </a>
@@ -149,8 +147,6 @@ if (isset($_POST['submit'])) {
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-            
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -172,7 +168,6 @@ if (isset($_POST['submit'])) {
             </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            
 
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
@@ -247,7 +242,7 @@ if (isset($_POST['submit'])) {
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                               
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="doclogout.php" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -267,8 +262,8 @@ if (isset($_POST['submit'])) {
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
-                        <p><b>Welcome Dr:</b><?php echo " " . $_SESSION['docname'] . "";?></p>
+
+                        <p><b>Welcome Dr:</b><?php echo " " . $_SESSION['docname'] . ""; ?></p>
                     </div>
 
                     <!-- Content Row -->
@@ -278,32 +273,32 @@ if (isset($_POST['submit'])) {
                                 <div class="card bg-c-blue order-card">
                                     <div class="card-block">
                                         <h6 class="m-b-20">Number of Patient Records</h6>
-                                        <h2 class="text-right"><i class="fa fa-user-plus f-left"></i><span></span></h2>
-                                        <p class="m-b-0"><span class="f-right"><?php 
-                                        include 'config.php';
-                                        $sql="select count('*') from patients";
-                                        $result=mysqli_query($conn,$sql);
-                                        $row=mysqli_fetch_array($result);
-                                        echo "<h3>$row[0]</h3>";
-                                        mysqli_close($conn);
-                                        ?></span></p>
+                                        <h2 class="text-right"><i class="fa fa-user. f-left"></i><span></span></h2>
+                                        <p class="m-b-0"><span class="f-right"><?php
+                                                                                include 'config.php';
+                                                                                $sql = "select count('*') from patients";
+                                                                                $result = mysqli_query($conn, $sql);
+                                                                                $row = mysqli_fetch_array($result);
+                                                                                echo "<h3>$row[0]</h3>";
+                                                                                mysqli_close($conn);
+                                                                                ?></span></p>
                                     </div>
                                 </div>
                             </div>
-        
+
                             <div class="col-md-4 col-xl-3">
                                 <div class="card bg-c-green order-card">
                                     <div class="card-block">
                                         <h6 class="m-b-20"> Number of active appointments</h6>
-                                        <h2 class="text-right"><i class="fa fa-calendar f-left"></i><span></span></h2>
-                                        <p class="m-b-0"><span class="f-right"><?php 
-                                        include 'config.php';
-                                        $sql="select count('*') from bookings";
-                                        $result=mysqli_query($conn,$sql);
-                                        $row=mysqli_fetch_array($result);
-                                        echo "<h3>$row[0]</h3>";
-                                        mysqli_close($conn);
-                                        ?></span></p></span></p>
+                                        <h2 class="text-right"><i class="fa fa-calenda f-left"></i><span></span></h2>
+                                        <p class="m-b-0"><span class="f-right"><?php
+                                                                                include 'config.php';
+                                                                                $sql = "select count('*') from bookings";
+                                                                                $result = mysqli_query($conn, $sql);
+                                                                                $row = mysqli_fetch_array($result);
+                                                                                echo "<h3>$row[0]</h3>";
+                                                                                mysqli_close($conn);
+                                                                                ?></span></p></span></p>
                                     </div>
                                 </div>
                             </div>
@@ -328,8 +323,8 @@ if (isset($_POST['submit'])) {
                                     <a href="records.php" class="btn btn-primary">View Records</a>
                                 </div>
 
-                                
-                               
+
+
                             </div>
 
                             <div class="card" style="width: 10rem;">
@@ -360,11 +355,11 @@ if (isset($_POST['submit'])) {
                                                             <div class="form-group">
                                                                 <input type="tel" class="form-control" id="contact" name="contact" placeholder="contact">
                                                             </div>
-                                                            
+
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control" id="address" name="address" placeholder="Address">
                                                             </div>
-                                                            
+
                                                             <div class="form-group">
                                                                 <select class="form-control" name="bloodgroup">
                                                                     <option selected>Blood group</option>
@@ -372,7 +367,7 @@ if (isset($_POST['submit'])) {
                                                                     <option value="B">B</option>
                                                                     <option value="AB">AB</option>
                                                                     <option value="O">O</option>
-                                                                    
+
                                                                 </select>
                                                             </div>
                                                             <div class="form-group">
@@ -383,7 +378,7 @@ if (isset($_POST['submit'])) {
                                                                     <option selected>Gender</option>
                                                                     <option value="Male">Male</option>
                                                                     <option value="Female">Female</option>
-                                                                    
+
                                                                 </select>
 
                                                             </div>
@@ -404,7 +399,7 @@ if (isset($_POST['submit'])) {
                                                             </div>
 
 
-                                                          
+
 
                                                         </div>
 
@@ -415,23 +410,24 @@ if (isset($_POST['submit'])) {
 
 
                                                         <?php
-                                                            if(!empty($message)){
-                                                            echo'<script type="text/javascript">
+                                                        if (!empty($message)) {
+                                                            echo '<script type="text/javascript">
                                                                 jQuery(function validation(){
                                                                 swal("New Record Added!", "done", "success");
                                                                 });
                                                                 </script>';
-                                                                }else{}
-                                                            if(empty($errormsg)){
-                                                            }else{
-                                                            echo'<script type="text/javascript">
+                                                        } else {
+                                                        }
+                                                        if (empty($errormsg)) {
+                                                        } else {
+                                                            echo '<script type="text/javascript">
                                                                 jQuery(function validation(){
                                                                 swal("Please Fill in correct details", "Fail", "error", {
                                                                 button: "Continue",
                                                                     });
                                                                 });
                                                             </script>';
-                                                            }
+                                                        }
                                                         ?>
 
                                                     </form>
@@ -450,7 +446,7 @@ if (isset($_POST['submit'])) {
 
                     </div>
                 </div>
-               
+
 
                 <!-- Content Row -->
 

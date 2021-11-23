@@ -78,6 +78,4 @@
     $content .= '</table>';  
     $pdf->writeHTML($content);  
     $pdf->Output('bookings.pdf', 'I');
-	
-
 ?>

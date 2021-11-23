@@ -27,7 +27,6 @@ $conn->close();
 
 ?>
   
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -36,7 +35,6 @@ $conn->close();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
 
-    
 </head>
 <body>
         <div class="inner">
@@ -73,8 +71,6 @@ $conn->close();
                 </div>
                 </form>
                 
-                
-
             </div>
         </div>
 </body>

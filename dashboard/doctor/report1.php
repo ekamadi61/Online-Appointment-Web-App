@@ -45,8 +45,8 @@
 		return $contents;
 	}
 
-	require_once('tcpdf/tcpdf.php');  
-    $pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);  
+	require_once('../tcpdf/tcpdf.php');  
+    $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);  
     $pdf->SetCreator(PDF_CREATOR);  
     $pdf->SetTitle("Generated PDF using TCPDF");  
     $pdf->SetHeaderData('', '', PDF_HEADER_TITLE, PDF_HEADER_STRING);  
@@ -67,19 +67,19 @@
       	<h4>Bookings</h4>
       	<table border="1" cellspacing="0" cellpadding="3">  
            <tr>  
-                <th width="5%">ID</th>
+                <th width="3.5%">ID</th>
 				<th width="7.6%">Name</th>
-				<th width="7.6%">Contact</th>
+				<th width="7.8%">Contact</th>
 				<th width="7.6%">Address</th> 
-        <th width="7.6%">Date Visited</th> 
-        <th width="7.6%">Blood Group</th> 
-        <th width="7.6%">Age</th> 
+        <th width="7.8%">Date Visited</th> 
+        <th width="7.4%">Blood Group</th> 
+        <th width="3.6%">Age</th> 
         <th width="7.6%">Gender</th> 
-        <th width="7.6%">Temperature</th> 
-        <th width="7.6%">Weight</th> 
-        <th width="7.6%">Symptoms</th> 
+        <th width="7.6%">Temp</th> 
+        <th width="5.6%">Weight</th> 
+        <th width="7.8%">Symptoms</th> 
         <th width="7.6%">Diagnosis</th> 
-        <th width="7.6%">Prescription</th> 
+        <th width="8.0%">Prescription</th> 
            </tr>  
       ';  
     $content .= generateRow();  

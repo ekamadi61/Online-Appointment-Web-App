@@ -30,7 +30,7 @@ if(!empty($_POST['username']) && !empty($_POST['mail']) && !empty($_POST['passwo
 }else{
     echo "All fields required";
    
-    }
+}
 
 unset($_SESSION);//addition
 $conn->close();
@@ -44,9 +44,6 @@ $conn->close();
     <title>Doc Zone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/signup.css">
-
-    
-
 </head>
 <body>
         <div class="inner">

@@ -1,7 +1,6 @@
 <?php 
 include('config.php');
 session_start();
-
     
     if(isset($_POST['save'])){
         $id = $_POST['update_id'];
@@ -12,7 +11,6 @@ session_start();
         $rate    = $_POST['rate'];
         $hours = $_POST['hours'];
        
-
         $query = "UPDATE doctors SET username='$username', specialty ='$specialty', contact ='$contact', address='$address', rate = '$rate', hours = '$hours' WHERE id ='$id'";
         $run = mysqli_query($conn, $query);
         if($run){
@@ -21,9 +19,9 @@ session_start();
             exit();
         }
     }
+
     //delete script
-    
-    if(isset($_POST['delete'])){
+        if(isset($_POST['delete'])){
         $id = $_POST['delete_id'];
         $query = "DELETE FROM doctors WHERE id ='$id'";
         $run = mysqli_query($conn, $query);
@@ -33,26 +31,24 @@ session_start();
             exit();
         }
     }
+
     //add doctor user
     if(isset($_POST['done'])){
         $docname 				= $_POST['docname'];
-		
 		$password			    = $_POST['password'];
-		
-       
-            $query = "INSERT INTO doctorusers(docname, password)"."VALUES('$docname','$password')";
-            $run = mysqli_query($conn,$query) or die(mysqli_error($conn));
-            if($run){
-                $message = 'success';
+		       
+        $query = "INSERT INTO doctorusers(docname, password)"."VALUES('$docname','$password')";
+        $run = mysqli_query($conn,$query) or die(mysqli_error($conn));
+        if($run){
+            $message = 'success';
             header('refresh:3;doctors.php');
             exit();
-                
-             }else{
-                $errormsg = 'error';
-                echo "all feilds required";
-             
-		}      
+        }else{
+            $errormsg = 'error';
+            echo "all feilds required";
+         }      
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,10 +61,8 @@ session_start();
     <meta name="description" content="">
     <meta name="author" content="">
 
-
     <title>Doc Zone Dash</title>
     
-
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -78,6 +72,9 @@ session_start();
 
     <!-- Custom styles for this page -->
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!--sweet alert js-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <style>
     h1{
         font-size:20px;
@@ -99,7 +96,8 @@ session_start();
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <!-- <i class="fas fa-laugh-wink"></i> -->
+                    <img src="img/success.png">
                 </div>
                 <div class="sidebar-brand-text mx-3">Doc Zone Admin </div>
             </a>
@@ -143,16 +141,12 @@ session_start();
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="doctors.php">
                     <i class="fas fa-fw fa-hospital"></i>
                     <span>Doctors</span>
                 </a>
-
             </li>
 
             <hr class="sidebar-divider">
@@ -226,8 +220,6 @@ session_start();
                             </div>
                         </li>
 
-
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -292,8 +284,6 @@ session_start();
                                                                     <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
 
                                                                 </div>
-                                                              
-
                                                             </div>
 
                                                             <div class="modal-footer">
@@ -327,9 +317,7 @@ session_start();
                                                 </div>
                                             </div>
                                         </div>
-                 
-
-                    <!-- DataTales Example -->
+                    <!-- DataTales -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Doctor Information</h6>
@@ -348,8 +336,6 @@ session_start();
                                 unset($_SESSION['ststus']);
                             }
                             ?>
-                            
-                          
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -363,23 +349,8 @@ session_start();
 
                                         </tr>
                                     </thead>
-                                    <!--<tfoot>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone Number</th>
-                                            <th>Age</th>
-											<th>Sex</th>
-											<th>Appointment Date</th>
-											<th>Appointment Time</th>
-											<th>Additional Remarks</th>
-                                          
-                                        </tr>
-                                    </tfoot>-->
+                                    
                                     <tbody>
-
-
                                         <?php
 
                                         include "config.php"; // Using database connection file here
@@ -397,7 +368,7 @@ session_start();
                                                 <td><?php echo $data['rate'];?></td>
                                                 <td><?php echo $data['hours']; ?></td>
                                                 <td>
-                                                
+                                                <!--edit button modal-->
                                                 <button type="button" class="btn btn-success editbtn"  name="edit"><i class="fas fa-edit" data-toggle="modal" data-target="#exampleModal"></i></button>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -443,12 +414,10 @@ session_start();
                                                                     <option value="9:00 - 12:00 PM">9:00 - 12:00 PM</option>
                                                                     <option value="2:00 - 4:00 PM">2:00 - 4:00 PM</option>
                                                                 </select>
-
                                                             </div>
-
                                                         </div>
 
-                                                        <div class="modal-footer">
+                                                    <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                         <button type="submit" class="btn btn-primary" name="save">Save </button>
                                                     </div>
@@ -458,35 +427,33 @@ session_start();
                                                     
                                                     </div>
                                                 </div>
-                                                </div>
+                                            </div>
                                                 <!--delete button-->
                                                 <button type="button" class="btn btn-danger deletebtn" name="delete" data-toggle="modal" data-target="#exampleModal2"><i class="far fa-trash-alt"></i></button>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
+                                        <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <form action="doctors.php" method="post">
+                                                <div class="modal-body">
+                                                    <form action="doctors.php" method="post">
                                                         <input type="hidden" class="form-control" name="delete_id" id="delete_id">
                                                                 <h1>Do you want to delete this record?</h1>
-                                                            <div class="modal-footer">
+                                                        <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                             <button type="submit" class="btn btn-primary" name="delete">Ok</button>
-                                                            </div>
-                                                        </form>
-                                                        
-
-                                                    </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                                     
-                                                    </div>
                                                 </div>
-                                                </div>
+                                            </div>
+                                        </div>
                                                 </td>
 
                                             </tr>
@@ -499,19 +466,14 @@ session_start();
 
                                 <?php mysqli_close($conn); // Close connection 
                                 ?>
-
-
-
                                 </tbody>
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
-
                 </div>
-                <!-- /.container-fluid -->
-
             </div>
+                
+        </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
@@ -602,19 +564,12 @@ session_start();
                     return $(this).text();
                 }).get();
                 console.log(data);
-                $('#delete_id').val(data[0]);
-                
-               
-                
-             
+                $('#delete_id').val(data[0]);          
             });
         });
 
-
-    </script>
-   
-   
-    
+</script>
+      
 </body>
 
 </html>

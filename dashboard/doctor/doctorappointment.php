@@ -1,35 +1,35 @@
-<?php 
+<?php
 include('config.php');
 session_start();
 
 
-    if(isset($_POST['update'])){
-        $id = $_POST['update_id'];
-        $fname = $_POST['fname'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $age = $_POST['age'];
-        $gender = $_POST['gender'];
-        $appointment_date = $_POST['appointment_date'];
-        $appointment_time = $_POST['appointment_time'];
-        $remarks = $_POST['remarks'];
+if (isset($_POST['update'])) {
+    $id = $_POST['update_id'];
+    $fname = $_POST['fname'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $appointment_date = $_POST['appointment_date'];
+    $appointment_time = $_POST['appointment_time'];
+    $remarks = $_POST['remarks'];
 
-        $query = "UPDATE bookings SET fname ='$fname', email ='$email', phone ='$phone', age ='$age', gender = '$gender', appointment_date ='$appointment_date', appointment_time ='$appointment_time' ,remarks ='$remarks' WHERE id ='$id' ";
-        $run = mysqli_query($conn, $query);
-        if($run){
-            echo"Record updated";
-        }else{
-            echo"$conn->error";
-        }
+    $query = "UPDATE bookings SET fname ='$fname', email ='$email', phone ='$phone', age ='$age', gender = '$gender', appointment_date ='$appointment_date', appointment_time ='$appointment_time' ,remarks ='$remarks' WHERE id ='$id' ";
+    $run = mysqli_query($conn, $query);
+    if ($run) {
+        echo "Record updated";
+    } else {
+        echo "$conn->error";
     }
-    //delete script
-    
-    if(isset($_POST['delete'])){
-        $id = $_POST['delete_id'];
-        $query = "DELETE FROM bookings WHERE id ='".$id."'";
-        $run = mysqli_query($conn, $query);
-    }
-    
+}
+//delete script
+
+if (isset($_POST['delete'])) {
+    $id = $_POST['delete_id'];
+    $query = "DELETE FROM bookings WHERE id ='" . $id . "'";
+    $run = mysqli_query($conn, $query);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -55,11 +55,10 @@ session_start();
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
-    h1{
-        font-size:20px;
-        text-align: center;
-    }
-    
+        h1 {
+            font-size: 20px;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -75,7 +74,7 @@ session_start();
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="doctorhome.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="../img/success.png">
                 </div>
                 <div class="sidebar-brand-text mx-3">Doc Zone </div>
             </a>
@@ -125,9 +124,6 @@ session_start();
                 </a>
 
             </li>
-
-           
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -190,14 +186,12 @@ session_start();
                             </div>
                         </li>
 
-
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['docname'] . "";?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['docname'] . ""; ?></span>
                                 <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -210,7 +204,7 @@ session_start();
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="doclogout.php" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -227,15 +221,14 @@ session_start();
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         <a href="report.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Bookings</h1>
-
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -260,7 +253,7 @@ session_start();
 
                                         </tr>
                                     </thead>
-                                    
+
                                     <tbody>
 
 
@@ -282,104 +275,102 @@ session_start();
                                                 <td><?php echo $data['appointment_date']; ?></td>
                                                 <td><?php echo $data['appointment_time']; ?></td>
                                                 <td><?php echo $data['remarks']; ?></td>
-                                                
+
                                                 <td>
-                                                <button type="button" class="btn btn-success editbtn" data-toggle="modal" data-target="#exampleModalLabel"><i class="fas fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-success editbtn" data-toggle="modal" data-target="#exampleModalLabel"><i class="fas fa-edit"></i></button>
 
-                                                 <!-- Modal -->
-                                    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Record</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="appointments.php" method="post">
-                                                    <input type="hidden" class="form-control" name="update_id" id="update_id" >
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="update_name" name="fname" placeholder="Enter Full Name">
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Record</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="appointments.php" method="post">
+                                                                        <input type="hidden" class="form-control" name="update_id" id="update_id">
+                                                                        <div class="modal-body">
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_name" name="fname" placeholder="Enter Full Name">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_email" name="email" placeholder="Enter Email">
+
+                                                                            </div>
+                                                                            <div class="form-group">
+
+                                                                                <input type="tel" class="form-control" id="update_cell" name="phone" placeholder="Enter Phone Number">
+                                                                            </div>
+                                                                            <div class="form-group">
+
+                                                                                <input type="text" class="form-control" id="update_age" name="age" placeholder="Enter Age">
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <select class="form-control" name="gender" id="update_gender">
+                                                                                    <option selected>Gender</option>
+                                                                                    <option value="Male">Male</option>
+                                                                                    <option value="Female">Female</option>
+
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <input type="date" class="form-control" id="update_date" name="appointment_date"><i class="fas fa-calender-alt"></i>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <input type="time" class="form-control" id="update_time" name="appointment_time"><i class="fas fa-clock-alt"></i>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_remarks" name="remarks" placeholder="Additional Comments">
+
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-primary" name="update">Save changes</button>
+                                                                        </div>
+
+                                                                    </form>
+                                                                </div>
+
                                                             </div>
-                                                            <div class="form-group">
-                                                            <input type="text" class="form-control" id="update_email" name="email" placeholder="Enter Email">
-                                                               
-                                                            </div>
-                                                            <div class="form-group">
-
-                                                                <input type="tel" class="form-control" id="update_cell" name="phone" placeholder="Enter Phone Number">
-                                                            </div>
-                                                            <div class="form-group">
-
-                                                                <input type="text" class="form-control" id="update_age" name="age" placeholder="Enter Age">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                            <select class="form-control" name="gender" id="update_gender">
-                                                                    <option selected>Gender</option>
-                                                                    <option value="Male">Male</option>
-                                                                    <option value="Female">Female</option>
-                                                                   
-                                                            </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <input type="date" class="form-control" id="update_date" name="appointment_date"><i class="fas fa-calender-alt"></i>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <input type="time" class="form-control" id="update_time" name="appointment_time"><i class="fas fa-clock-alt"></i>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                            <input type="text" class="form-control" id="update_remarks" name="remarks" placeholder="Additional Comments">
-
-                                                            </div>
-
                                                         </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary" name="update">Save changes</button>
-                                                        </div>
-
-                                                    </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                               
-                                                <button type="button" class="btn btn-danger deletebtn" name="delete" data-toggle="modal" data-target="#exampleModal2"><i class="far fa-trash-alt"></i></button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                        </button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <form action="appointments.php" method="post">
-                                                            <input type="hidden" class="form-control" id="delete_id" name="delete_id">
-                                                                <h1>Do you want to delete this record?</h1>
-                                                            <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                            <button type="submit" class="btn btn-primary" name="delete">Ok</button>
+                                                    <button type="button" class="btn btn-danger deletebtn" name="delete" data-toggle="modal" data-target="#exampleModal2"><i class="far fa-trash-alt"></i></button>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="appointments.php" method="post">
+                                                                        <input type="hidden" class="form-control" id="delete_id" name="delete_id">
+                                                                        <h1>Do you want to delete this record?</h1>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                            <button type="submit" class="btn btn-primary" name="delete">Ok</button>
+                                                                        </div>
+                                                                    </form>
+
+
+                                                                </div>
+
                                                             </div>
-                                                        </form>
-                                                        
-
+                                                        </div>
                                                     </div>
-                                                    
-                                                    </div>
-                                                </div>
-                                                </div>
                                                 </td>
                                             </tr>
                                         <?php
@@ -389,9 +380,6 @@ session_start();
 
                                 <?php mysqli_close($conn); // Close connection 
                                 ?>
-
-
-
                                 </tbody>
                                 </table>
                             </div>
@@ -462,11 +450,11 @@ session_start();
     <script src="../js/demo/datatables-demo.js"></script>
 
     <script>
-        $(document).ready(function(){
-            $(document).on('click','.editbtn',function(){
+        $(document).ready(function() {
+            $(document).on('click', '.editbtn', function() {
                 $('#editmodal').modal('show');
-                $tr=$(this).closest('tr');
-                var data = $tr.children("td").map(function(){
+                $tr = $(this).closest('tr');
+                var data = $tr.children("td").map(function() {
                     return $(this).text();
                 }).get();
                 console.log(data);
@@ -479,31 +467,25 @@ session_start();
                 $('#update_date').val(data[6]);
                 $('#update_time').val(data[7]);
                 $('#update_remarks').val(data[8]);
-                
-             
+
+
             });
         });
-
     </script>
 
-<script>
-        $(document).ready(function(){
-            $(document).on('click','.deletebtn',function(){
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.deletebtn', function() {
                 $('#deletemodal').modal('show');
-                $tr=$(this).closest('tr');
-                var data = $tr.children("td").map(function(){
+                $tr = $(this).closest('tr');
+                var data = $tr.children("td").map(function() {
                     return $(this).text();
                 }).get();
                 console.log(data);
                 $('#delete_id').val(data[0]);
-                
-               
-                
-             
+
             });
         });
-
-
     </script>
 
 </body>

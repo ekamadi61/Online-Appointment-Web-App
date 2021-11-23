@@ -1,8 +1,5 @@
 <?php
-
 session_start();
-
-
 include('config.php');
 if (isset($_POST['submit'])) {
     if (!empty($_POST['fname']) && !empty($_POST['sname']) && !empty($_POST['phone']) && !empty($_POST['email']) && !empty($_POST['address'])) {
@@ -12,9 +9,7 @@ if (isset($_POST['submit'])) {
         $email                 = $_POST['email'];
         $address               = $_POST['address'];
 
-
         $query = "INSERT INTO userProfile(fname, sname, phone, email, address)" . "VALUES('$fname','$sname','$phone','$email','$address')";
-
         $run = mysqli_query($conn, $query) or die(mysqli_error($conn));
         if ($run) {
             $message = 'success';
@@ -31,46 +26,44 @@ if (isset($_POST['submit'])) {
 }
 //update password script
 if (isset($_SESSION['mail']) && isset($_SESSION['username'])) {
-if (isset($_POST['save'])) {
-    if (!empty($_POST['mail']) && !empty($_POST['passwordNew']) && !empty($_POST['passwordRepeat'])) {
-        $mail                     = $_POST['mail'];
-        $passwordNew              = $_POST['passwordNew'];
-        $passwordRepeat           = $_POST['passwordRepeat'];
+    if (isset($_POST['update'])) {
+        if (!empty($_POST['mail']) && !empty($_POST['passwordNew']) && !empty($_POST['passwordRepeat'])) {
+            $mail                     = $_POST['mail'];
+            $passwordNew              = $_POST['passwordNew'];
+            $passwordRepeat           = $_POST['passwordRepeat'];
 
-      
-         $sql="SELECT * FROM users WHERE mail = '$mail' ";//AND password ='$password'
-         $re = mysqli_query($conn,$sql);
-         $row = mysqli_fetch_array($re);
-         if($row>0)
-         {
-          
-         $qrys="UPDATE users SET password='$passwordNew' WHERE mail='$mail';";
-         $results= mysqli_query($conn,$qrys);
-        
-         }
-         if ($qrys) {
-            $message = 'success';
-            header('refresh:2;profile.php');
-        } else {
-            $errormsg = 'error';
-            echo "all feilds required";
+
+            $sql = "SELECT * FROM users WHERE mail = '$mail' "; //AND password ='$password'
+            $re = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($re);
+            if ($row > 0) {
+                $qrys = "UPDATE users SET password='$passwordNew' WHERE mail='$mail';";
+                $results = mysqli_query($conn, $qrys);
+            }
+            if ($qrys) {
+                $message = 'success';
+                header('refresh:2;profile.php');
+            } else {
+                $errormsg = 'error';
+                echo "all feilds required";
+            }
         }
-        }
-    
+    }
 }
-if(isset($_POST['delete'])){
+//delete script
+if (isset($_POST['delete'])) {
     $id = $_POST['delete_id'];
     $query = "DELETE FROM userprofile WHERE id ='$id'";
     $run = mysqli_query($conn, $query);
-    if($run){
+    if ($run) {
         $message = 'success';
         header('refresh:3; profile.php');
-    }else{
-        $errormsg ='error';
+    } else {
+        $errormsg = 'error';
         echo "something went wrong!";
     }
 }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -161,11 +154,10 @@ if(isset($_POST['delete'])){
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="home.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="img/success.png">
                 </div>
                 <div class="sidebar-brand-text mx-3">Doc Zone Admin </div>
             </a>
-
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
@@ -175,24 +167,20 @@ if(isset($_POST['delete'])){
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
             <!-- Heading -->
             <div class="sidebar-heading">
                 Interface
             </div>
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="profile.php">
                     <i class="fas fa-fw fa-user-circle"></i>
                     <span>Profile</span>
                 </a>
-
             </li>
-
+            <!--divider-->
             <hr class="sidebar-divider">
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
@@ -200,13 +188,9 @@ if(isset($_POST['delete'])){
                     <i class="fas fa-fw fa-calendar-alt"></i>
                     <span>Bookings</span>
                 </a>
-
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider">
-
-
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -214,9 +198,8 @@ if(isset($_POST['delete'])){
                     <i class="fas fa-fw fa-hospital-user"></i>
                     <span>Doctors</span>
                 </a>
-
             </li>
-
+            <!--divivder-->
             <hr class="sidebar-divider">
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -224,32 +207,25 @@ if(isset($_POST['delete'])){
                     <i class="fas fa-fw fa-comments"></i>
                     <span>Messages</span></a>
             </li>
-
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
-
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-
             <!-- Main Content -->
             <div id="content">
-
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
-
                     <!-- Topbar Search -->
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
@@ -261,23 +237,18 @@ if(isset($_POST['delete'])){
                             </div>
                         </div>
                     </form>
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
-
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-
-
                             <div class="topbar-divider d-none d-sm-block"></div>
-
                             <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['username'] . "";?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['username'] . ""; ?></span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -301,9 +272,7 @@ if(isset($_POST['delete'])){
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 
@@ -313,18 +282,14 @@ if(isset($_POST['delete'])){
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Profile</h1>
-                       <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>-->
                     </div>
-
 
                     <body oncontextmenu='return false' class='snippet-body'>
                         <div class="container rounded bg-white mt-5 mb-5">
                             <div class="row">
                                 <div class="col-md-3 border-right">
-                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-s;ilhouette-glasses-profile.jpg"><span class="font-weight-bold"> 
-<?php echo "Admin: " . $_SESSION['username'] . ""; 
-                                                                                                                                                                                                                                                                                                                                            ?></span><span class="text-black-50"><?php echo " " . $_SESSION['mail'] . "";  
-                                                                                                                                                                                                                                                                                                                                                                                                                               ?></span><span> </span></div>
+                                    <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-s;ilhouette-glasses-profile.jpg"><span class="font-weight-bold">
+                                            <?php echo "Admin: " . $_SESSION['username'] . ""; ?></span><span class="text-black-50"><?php echo " " . $_SESSION['mail'] . ""; ?></span><span> </span></div>
                                 </div>
                                 <div class="col-md-5 border-right">
                                     <div class="p-3 py-5">
@@ -347,9 +312,6 @@ if(isset($_POST['delete'])){
                                             </div>
                                             <div class="row mt-3">
                                                 <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" value="<?php echo $data['phone']; ?>"></div>
-
-
-
                                                 <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" value="<?php echo $data['email']; ?>"></div>
 
                                             </div>
@@ -362,10 +324,8 @@ if(isset($_POST['delete'])){
                                             ?>
 
                                             </div>
+                                            <!--edit btn modal-->
                                             <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" data-toggle="modal" data-target="#exampleModal">Edit Profile</button></div>
-
-
-
                                             <!-- Modal -->
                                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -382,14 +342,11 @@ if(isset($_POST['delete'])){
                                                                     <div class="form-group">
 
                                                                         <input type="text" class="form-control" id="username" name="fname" placeholder="Enter first name">
-
                                                                     </div>
                                                                     <div class="form-group">
-
                                                                         <input type="text" class="form-control" id="surname" name="sname" placeholder="Surname">
                                                                     </div>
                                                                     <div class="form-group">
-
                                                                         <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number">
                                                                     </div>
                                                                     <div class="form-group">
@@ -400,34 +357,32 @@ if(isset($_POST['delete'])){
                                                                     <div class="form-group">
                                                                         <input type="text" class="form-control" id="address" name="address" placeholder="Address">
                                                                     </div>
-
                                                                 </div>
-
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                     <button type="submit" class="btn btn-primary" name="submit">Save changes</button>
                                                                 </div>
 
                                                                 <?php
-                                                            if(!empty($message)){
-                                                            echo'<script type="text/javascript">
+                                                                if (!empty($message)) {
+                                                                    echo '<script type="text/javascript">
                                                                 jQuery(function validation(){
                                                                 swal("Profile Updated Succesfully!", "done", "success");
                                                                 });
                                                                 </script>';
-                                                                }else{}
-                                                            if(empty($errormsg)){
-                                                            }else{
-                                                            echo'<script type="text/javascript">
+                                                                } else {
+                                                                }
+                                                                if (empty($errormsg)) {
+                                                                } else {
+                                                                    echo '<script type="text/javascript">
                                                                 jQuery(function validation(){
                                                                 swal("Please Fill in correct details", "Fail", "error", {
                                                                 button: "Continue",
                                                                     });
                                                                 });
                                                             </script>';
-                                                            }
-                                                        ?>
-
+                                                                }
+                                                                ?>
                                                             </form>
                                                         </div>
 
@@ -439,10 +394,11 @@ if(isset($_POST['delete'])){
                                 </div>
                                 <div class="col-md-4">
                                     <div class="p-3 py-5">
+                                        <!--delete btn modal-->
                                         <div class="d-flex justify-content-between align-items-center profile"><span class="border px-3 p-1 add-experience" data-toggle="modal" data-target="#exampleModal3"><i class="fa fa-trash"></i>&nbsp;Delete Profile</span></div><br>
 
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -452,25 +408,26 @@ if(isset($_POST['delete'])){
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                    <form action="profile.php" method="post">
+                                                        <form action="profile.php" method="post">
                                                             <input type="hidden" id="delete_id" name="delete_id">
-                                                                <h4>Do you want to delete this record ?</h4>
+                                                            <h4>Do you want to delete this record ?</h4>
                                                             <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                            <button type="submit" class="btn btn-primary" name="delete">Ok</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                <button type="submit" class="btn btn-primary" name="delete">Ok</button>
                                                             </div>
 
                                                             <?php
-                                                            if(!empty($message)){
-                                                            echo'<script type="text/javascript">
+                                                            if (!empty($message)) {
+                                                                echo '<script type="text/javascript">
                                                                 jQuery(function validation(){
-                                                                swal("Password Updated Succesfully!", "done", "success");
+                                                                swal("Record Deleted Succesfully!", "done", "success");
                                                                 });
                                                                 </script>';
-                                                                }else{}
-                                                            if(empty($errormsg)){
-                                                            }else{
-                                                            echo'<script type="text/javascript">
+                                                            } else {
+                                                            }
+                                                            if (empty($errormsg)) {
+                                                            } else {
+                                                                echo '<script type="text/javascript">
                                                                 jQuery(function validation(){
                                                                 swal("Please Fill in correct details", "Fail", "error", {
                                                                 button: "Continue",
@@ -478,7 +435,7 @@ if(isset($_POST['delete'])){
                                                                 });
                                                             </script>';
                                                             }
-                                                        ?>
+                                                            ?>
 
                                                         </form>
                                                     </div>
@@ -487,10 +444,8 @@ if(isset($_POST['delete'])){
                                             </div>
                                         </div>
 
-                                        <!--Update password-->
+                                        <!--Update password modal-->
                                         <div class="d-flex justify-content-between align-items-center profile"><span class="border px-3 p-1 add-experience" data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-lock-open"></i>&nbsp;Change Password</span></div><br>
-
-
 
                                         <!-- Modal -->
                                         <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -517,25 +472,24 @@ if(isset($_POST['delete'])){
 
                                                                     <input type="password" class="form-control" id="passwordRepeat" name="passwordRepeat" placeholder="Repeat Password">
                                                                 </div>
-
                                                             </div>
-
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="submit" class="btn btn-primary" name="delete">Save changes</button>
+                                                                <button type="submit" class="btn btn-primary" name="update">Save changes</button>
                                                             </div>
 
                                                             <?php
-                                                            if(!empty($message)){
-                                                            echo'<script type="text/javascript">
+                                                            if (!empty($message)) {
+                                                                echo '<script type="text/javascript">
                                                                 jQuery(function validation(){
                                                                 swal("Password Updated Succesfully!", "done", "success");
                                                                 });
                                                                 </script>';
-                                                                }else{}
-                                                            if(empty($errormsg)){
-                                                            }else{
-                                                            echo'<script type="text/javascript">
+                                                            } else {
+                                                            }
+                                                            if (empty($errormsg)) {
+                                                            } else {
+                                                                echo '<script type="text/javascript">
                                                                 jQuery(function validation(){
                                                                 swal("Please Fill in correct details", "Fail", "error", {
                                                                 button: "Continue",
@@ -543,7 +497,7 @@ if(isset($_POST['delete'])){
                                                                 });
                                                             </script>';
                                                             }
-                                                        ?>
+                                                            ?>
 
                                                         </form>
                                                     </div>
@@ -614,8 +568,6 @@ if(isset($_POST['delete'])){
 
                 <!-- Custom scripts for all pages-->
                 <script src="js/sb-admin-2.min.js"></script>
-
-
 </body>
 
 </html>

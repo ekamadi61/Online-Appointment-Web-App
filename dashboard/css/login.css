@@ -106,20 +106,13 @@ span:nth-child(3){
     border: none;
     /* background: #6c25be; */
     background:  #fe745c;
-    
-    
-
-
-
 }
 .pword .a{
     color:white;
 }
 /*addtion*/
 .footer{
-  
-   position:relative;
- 
+position:relative;
 }
 div.a{
 position:absolute;
@@ -134,7 +127,6 @@ width:30px;
 height:20px;
 }
 /*end*/
-
 
 @media(max-width: 665px){
     .photo{
@@ -162,8 +154,6 @@ height:20px;
     .action-btn{
         width:200px;
         display:flex;
-        
     }
    
-    
 }

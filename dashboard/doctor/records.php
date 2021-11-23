@@ -2,33 +2,33 @@
 include 'config.php';
 session_start();
 
-if(isset($_POST['update'])){
-      $id = $_POST['update_id'];
-      $username = $_POST['username'];
-      $contact = $_POST['contact'];
-      $address = $_POST['address'];
-      $bloodgroup = $_POST['bloodgroup'];
-      $age = $_POST['age'];
-      $gender = $_POST['gender'];
-      $temperature = $_POST['temperature'];
-      $weight = $_POST['weight'];
-      $symptoms = $_POST['symptoms'];
-      $diagnosis = $_POST['diagnosis'];
-      $prescription = $_POST['prescription'];
+if (isset($_POST['update'])) {
+    $id = $_POST['update_id'];
+    $username = $_POST['username'];
+    $contact = $_POST['contact'];
+    $address = $_POST['address'];
+    $bloodgroup = $_POST['bloodgroup'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $temperature = $_POST['temperature'];
+    $weight = $_POST['weight'];
+    $symptoms = $_POST['symptoms'];
+    $diagnosis = $_POST['diagnosis'];
+    $prescription = $_POST['prescription'];
 
-      $query = "UPDATE patients SET username ='$username', contact ='$contact', address ='$address', bloodgroup ='$bloodgroup', age='$age', gender = '$gender', temperature ='$temperature', symptoms ='$symptoms' ,diagnosis ='$diagnosis', prescription = '$prescription' WHERE id ='$id' ";
-      $run = mysqli_query($conn, $query);
-      if($run){
-          echo"Record updated";
-      }else{
-          echo"$conn->error";
-      }
-  }
+    $query = "UPDATE patients SET username ='$username', contact ='$contact', address ='$address', bloodgroup ='$bloodgroup', age='$age', gender = '$gender', temperature ='$temperature', symptoms ='$symptoms' ,diagnosis ='$diagnosis', prescription = '$prescription' WHERE id ='$id' ";
+    $run = mysqli_query($conn, $query);
+    if ($run) {
+        echo "Record updated";
+    } else {
+        echo "$conn->error";
+    }
+}
 
-if(isset($_POST['delete'])){
-      $id = $_POST['delete_id'];
-      $query = "DELETE FROM patients WHERE id ='".$id."'";
-      $run = mysqli_query($conn, $query);
+if (isset($_POST['delete'])) {
+    $id = $_POST['delete_id'];
+    $query = "DELETE FROM patients WHERE id ='" . $id . "'";
+    $run = mysqli_query($conn, $query);
 }
 
 ?>
@@ -55,11 +55,10 @@ if(isset($_POST['delete'])){
     <!-- Custom styles for this page -->
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
-    h1{
-        font-size:20px;
-        text-align: center;
-    }
-    
+        h1 {
+            font-size: 20px;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -75,7 +74,7 @@ if(isset($_POST['delete'])){
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="doctorhome.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <img src="../img/success.png">
                 </div>
                 <div class="sidebar-brand-text mx-3">Doc Zone</div>
             </a>
@@ -93,7 +92,7 @@ if(isset($_POST['delete'])){
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            
+
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
@@ -185,14 +184,12 @@ if(isset($_POST['delete'])){
                             </div>
                         </li>
 
-
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['docname'] . "";?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo " " . $_SESSION['docname'] . ""; ?></span>
                                 <img class="img-profile rounded-circle" src="../img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -205,7 +202,7 @@ if(isset($_POST['delete'])){
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="doclogout.php" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -222,8 +219,8 @@ if(isset($_POST['delete'])){
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                         <a href="report1.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
@@ -259,7 +256,7 @@ if(isset($_POST['delete'])){
 
                                         </tr>
                                     </thead>
-                                    
+
                                     <tbody>
 
 
@@ -285,121 +282,121 @@ if(isset($_POST['delete'])){
                                                 <td><?php echo $data['symptoms']; ?></td>
                                                 <td><?php echo $data['diagnosis']; ?></td>
                                                 <td><?php echo $data['prescription']; ?></td>
-                                                
-                                                
-                                                
+
+
+
                                                 <td>
-                                                <button type="button" class="btn btn-success editbtn" data-toggle="modal" data-target="#exampleModalLabel"><i class="fas fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-success editbtn" data-toggle="modal" data-target="#exampleModalLabel"><i class="fas fa-edit"></i></button>
 
-                                                 <!-- Modal -->
-                                    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Record</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="records.php" method="post">
-                                                    <input type="hidden" class="form-control" name="update_id" id="update_id" >
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="update_name" name="username" placeholder="Enter Full Name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                            <input type="text" class="form-control" id="update_contact" name="contact" placeholder="Enter Contact Number">
-                                                               
-                                                            </div>
-                                                            <div class="form-group">
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Record</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="records.php" method="post">
+                                                                        <input type="hidden" class="form-control" name="update_id" id="update_id">
+                                                                        <div class="modal-body">
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_name" name="username" placeholder="Enter Full Name">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_contact" name="contact" placeholder="Enter Contact Number">
 
-                                                                <input type="tel" class="form-control" id="update_address" name="address" placeholder="Enter Address">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <select class="form-control" name="bloodgroup" id="update_blood">
-                                                                    <option selected>Blood group</option>
-                                                                    <option value="A">A</option>
-                                                                    <option value="B">B</option>
-                                                                    <option value="AB">AB</option>
-                                                                    <option value="O">O</option>
-                                                                    
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="update_age" name="age" placeholder="Enter Age">
-                                                            </div>
+                                                                            </div>
+                                                                            <div class="form-group">
 
-                                                            <div class="form-group">
-                                                            <select class="form-control" name="gender" id="update_gender">
-                                                                    <option selected>Gender</option>
-                                                                    <option value="Male">Male</option>
-                                                                    <option value="Female">Female</option>
-                                                                   
-                                                            </select>
-                                                            </div>
+                                                                                <input type="tel" class="form-control" id="update_address" name="address" placeholder="Enter Address">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <select class="form-control" name="bloodgroup" id="update_blood">
+                                                                                    <option selected>Blood group</option>
+                                                                                    <option value="A">A</option>
+                                                                                    <option value="B">B</option>
+                                                                                    <option value="AB">AB</option>
+                                                                                    <option value="O">O</option>
 
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="update_temp" name="temperature" placeholder="Enter Temperature">
-                                                            </div>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_age" name="age" placeholder="Enter Age">
+                                                                            </div>
 
-                                                            
-                                                            <div class="form-group">
-                                                                <input type="text" class="form-control" id="update_weight" name="weight" placeholder="Enter Weight">
-                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <select class="form-control" name="gender" id="update_gender">
+                                                                                    <option selected>Gender</option>
+                                                                                    <option value="Male">Male</option>
+                                                                                    <option value="Female">Female</option>
 
-                                                            <div class="form-group">
-                                                            <input type="text" class="form-control" id="update_symptoms" name="symptoms" placeholder="Symptoms">
-                                                            </div>
-                                                            <div class="form-group">
-                                                            <input type="text" class="form-control" id="update_diag" name="diagnosis" placeholder="Diagnosis">
-                                                            </div>
-                                                            <div class="form-group">
-                                                            <input type="text" class="form-control" id="update_pres" name="prescription" placeholder="Prescription">
-                                                            </div>
+                                                                                </select>
+                                                                            </div>
 
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_temp" name="temperature" placeholder="Enter Temperature">
+                                                                            </div>
+
+
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_weight" name="weight" placeholder="Enter Weight">
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_symptoms" name="symptoms" placeholder="Symptoms">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_diag" name="diagnosis" placeholder="Diagnosis">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" id="update_pres" name="prescription" placeholder="Prescription">
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-primary" name="update">Save changes</button>
+                                                                        </div>
+
+                                                                    </form>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary" name="update">Save changes</button>
-                                                        </div>
-
-                                                    </form>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                               
-                                                <button type="button" class="btn btn-danger deletebtn" name="delete" data-toggle="modal" data-target="#exampleModal2"><i class="far fa-trash-alt"></i></button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                        </button>
                                                     </div>
-                                                    <div class="modal-body">
-                                                        <form action="records.php" method="post">
-                                                            <input type="hidden" class="form-control" id="delete_id" name="delete_id">
-                                                                <h1>Do you want to delete this record?</h1>
-                                                            <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                            <button type="submit" class="btn btn-primary" name="delete">Ok</button>
+
+
+                                                    <button type="button" class="btn btn-danger deletebtn" name="delete" data-toggle="modal" data-target="#exampleModal2"><i class="far fa-trash-alt"></i></button>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Delete Record</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="records.php" method="post">
+                                                                        <input type="hidden" class="form-control" id="delete_id" name="delete_id">
+                                                                        <h1>Do you want to delete this record?</h1>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                                            <button type="submit" class="btn btn-primary" name="delete">Ok</button>
+                                                                        </div>
+                                                                    </form>
+
+
+                                                                </div>
+
                                                             </div>
-                                                        </form>
-                                                        
-
+                                                        </div>
                                                     </div>
-                                                    
-                                                    </div>
-                                                </div>
-                                                </div>
                                                 </td>
                                             </tr>
                                         <?php
@@ -482,11 +479,11 @@ if(isset($_POST['delete'])){
     <script src="../js/demo/datatables-demo.js"></script>
 
     <script>
-        $(document).ready(function(){
-            $(document).on('click','.editbtn',function(){
+        $(document).ready(function() {
+            $(document).on('click', '.editbtn', function() {
                 $('#editmodal').modal('show');
-                $tr=$(this).closest('tr');
-                var data = $tr.children("td").map(function(){
+                $tr = $(this).closest('tr');
+                var data = $tr.children("td").map(function() {
                     return $(this).text();
                 }).get();
                 console.log(data);
@@ -502,31 +499,25 @@ if(isset($_POST['delete'])){
                 $('#update_symptoms').val(data[10]);
                 $('#update_diagnosis').val(data[11]);
                 $('#update_prescription').val(data[12]);
-                
-             
+
+
             });
         });
-
     </script>
 
-<script>
-        $(document).ready(function(){
-            $(document).on('click','.deletebtn',function(){
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.deletebtn', function() {
                 $('#deletemodal').modal('show');
-                $tr=$(this).closest('tr');
-                var data = $tr.children("td").map(function(){
+                $tr = $(this).closest('tr');
+                var data = $tr.children("td").map(function() {
                     return $(this).text();
                 }).get();
                 console.log(data);
                 $('#delete_id').val(data[0]);
-                
-               
-                
-             
+
             });
         });
-
-
     </script>
 
 </body>
